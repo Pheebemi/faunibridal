@@ -1,4 +1,4 @@
-import { supabase } from './client'
+import { createClient } from './server-client'
 import { Database } from './types'
 
 type Collection = Database['public']['Tables']['collections']['Row']
@@ -6,6 +6,7 @@ type Dress = Database['public']['Tables']['dresses']['Row']
 
 // Collections API
 export async function getCollections() {
+  const supabase = createClient()
   const { data, error } = await supabase
     .from('collections')
     .select('*')
@@ -16,6 +17,7 @@ export async function getCollections() {
 }
 
 export async function getFeaturedCollections() {
+  const supabase = createClient()
   const { data, error } = await supabase
     .from('collections')
     .select('*')
@@ -27,6 +29,7 @@ export async function getFeaturedCollections() {
 }
 
 export async function getCollectionBySlug(slug: string) {
+  const supabase = createClient()
   const { data, error } = await supabase
     .from('collections')
     .select('*')
@@ -39,6 +42,7 @@ export async function getCollectionBySlug(slug: string) {
 
 // Dresses API
 export async function getDresses(collectionId?: string) {
+  const supabase = createClient()
   const query = supabase
     .from('dresses')
     .select('*, collections(*)')
@@ -55,6 +59,7 @@ export async function getDresses(collectionId?: string) {
 }
 
 export async function getFeaturedDresses() {
+  const supabase = createClient()
   const { data, error } = await supabase
     .from('dresses')
     .select('*, collections(*)')
@@ -66,6 +71,7 @@ export async function getFeaturedDresses() {
 }
 
 export async function getDressById(id: string) {
+  const supabase = createClient()
   const { data, error } = await supabase
     .from('dresses')
     .select('*, collections(*)')

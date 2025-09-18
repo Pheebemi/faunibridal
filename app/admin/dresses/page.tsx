@@ -2,9 +2,18 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { getDresses } from "@/lib/supabase/api"
+import { Database } from "@/lib/supabase/types"
+
+type Dress = Database['public']['Tables']['dresses']['Row']
+type Collection = Database['public']['Tables']['collections']['Row']
 
 export default async function DressesPage() {
-  const dresses = await getDresses()
+  let dresses: (Dress & { collections: Collection })[] = []
+  try {
+    dresses = await getDresses()
+  } catch (error) {
+    console.error('Error fetching dresses:', error)
+  }
 
   return (
     <div className="container py-8">

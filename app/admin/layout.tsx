@@ -1,12 +1,12 @@
 'use client'
 
 import { ReactNode } from "react"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
 import { signOut } from "@/lib/supabase/auth"
 import { useAuth } from "@/lib/context/auth-context"
+import AdminSidebar from "@/components/ui/admin-sidebar"
 
 export default function AdminLayout({
   children,
@@ -31,34 +31,20 @@ export default function AdminLayout({
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 items-center justify-between">
-          <div className="flex items-center gap-6 md:gap-8">
-            <Link href="/admin" className="font-semibold">
-              Admin Dashboard
-            </Link>
-            <nav className="flex items-center gap-4 md:gap-6">
-              <Link
-                href="/admin/collections"
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-              >
-                Collections
-              </Link>
-              <Link
-                href="/admin/dresses"
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-              >
-                Dresses
-              </Link>
-            </nav>
-          </div>
+    <div className="flex h-screen">
+      <AdminSidebar />
+      <div className="flex-1 flex flex-col">
+        <header className="h-14 border-b px-4 flex items-center justify-end">
           <Button variant="ghost" onClick={handleSignOut}>
             Sign Out
           </Button>
-        </div>
-      </header>
-      <main className="flex-1">{children}</main>
+        </header>
+        <main className="flex-1 overflow-auto p-6">
+          <div className="mx-auto max-w-7xl">
+            {children}
+          </div>
+        </main>
+      </div>
     </div>
   )
 }

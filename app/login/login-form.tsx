@@ -29,12 +29,10 @@ export default function LoginForm() {
     const password = formData.get("password") as string
 
     try {
-      const { session } = await signIn(email, password)
-      if (session) {
-        toast.success("Successfully logged in!")
-        router.refresh() // Refresh the router to update auth state
-        router.push("/admin")
-      }
+      await signIn(email, password)
+      toast.success("Successfully logged in!")
+      router.refresh() // Refresh the router to update auth state
+      router.push("/admin")
     } catch (error: any) {
       console.error("Sign in error:", error)
       toast.error(error.message || "Failed to sign in")

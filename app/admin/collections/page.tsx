@@ -2,9 +2,17 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { getCollections } from "@/lib/supabase/api"
+import { Database } from "@/lib/supabase/types"
+
+type Collection = Database['public']['Tables']['collections']['Row']
 
 export default async function CollectionsPage() {
-  const collections = await getCollections()
+  let collections: Collection[] = []
+  try {
+    collections = await getCollections()
+  } catch (error) {
+    console.error('Error fetching collections:', error)
+  }
 
   return (
     <div className="container py-8">

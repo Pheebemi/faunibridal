@@ -1,51 +1,28 @@
 'use client'
 
-import { createContext, useCallback, useContext, useEffect, useState } from 'react'
+import { createContext, useContext } from 'react'
 import { Session, User } from '@supabase/supabase-js'
-import { getSession, getCurrentUser } from '@/lib/supabase/auth'
+import { useSupabaseSession } from '@/components/providers/supabase-provider'
 
 interface AuthContextType {
   session: Session | null
   user: User | null
   isLoading: boolean
-  checkUser: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType>({
   session: null,
   user: null,
-  isLoading: true,
-  checkUser: async () => {},
+  isLoading: false,
 })
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [session, setSession] = useState<Session | null>(null)
-  const [user, setUser] = useState<User | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
-
-  const checkUser = useCallback(async () => {
-    try {
-      const session = await getSession()
-      const user = await getCurrentUser()
-      setSession(session)
-      setUser(user)
-    } catch (error) {
-      setSession(null)
-      setUser(null)
-    } finally {
-      setIsLoading(false)
-    }
-  }, [])
-
-  useEffect(() => {
-    checkUser()
-  }, [checkUser])
+  const { session } = useSupabaseSession()
 
   const value = {
     session,
-    user,
-    isLoading,
-    checkUser,
+    user: session?.user ?? null,
+    isLoading: false,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
