@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { getCollections } from "@/lib/supabase/api"
@@ -31,11 +32,14 @@ export default async function CollectionsPage() {
             </CardHeader>
             <CardContent>
               {collection.image_url && (
-                <img
-                  src={collection.image_url}
-                  alt={collection.name}
-                  className="aspect-[16/9] object-cover rounded-lg mb-4"
-                />
+                <div className="relative aspect-[16/9] mb-4">
+                  <Image
+                    src={collection.image_url}
+                    alt={collection.name}
+                    fill
+                    className="object-cover rounded-lg"
+                  />
+                </div>
               )}
               <div className="flex items-center gap-4">
                 <Button variant="outline" asChild>

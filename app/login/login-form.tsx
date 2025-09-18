@@ -33,9 +33,9 @@ export default function LoginForm() {
       toast.success("Successfully logged in!")
       router.refresh() // Refresh the router to update auth state
       router.push("/admin")
-    } catch (error: any) {
+    } catch (error) {
       console.error("Sign in error:", error)
-      toast.error(error.message || "Failed to sign in")
+      toast.error(error instanceof Error ? error.message : "Failed to sign in")
     } finally {
       setIsLoading(false)
     }

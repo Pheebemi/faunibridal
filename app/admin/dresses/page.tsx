@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { getDresses } from "@/lib/supabase/api"
@@ -32,11 +33,14 @@ export default async function DressesPage() {
             </CardHeader>
             <CardContent>
               {dress.images?.[0] && (
-                <img
-                  src={dress.images[0]}
-                  alt={dress.name}
-                  className="aspect-[16/9] object-cover rounded-lg mb-4"
-                />
+                <div className="relative aspect-[16/9] mb-4">
+                  <Image
+                    src={dress.images[0]}
+                    alt={dress.name}
+                    fill
+                    className="object-cover rounded-lg"
+                  />
+                </div>
               )}
               <div className="space-y-2">
                 <p className="text-sm text-muted-foreground">

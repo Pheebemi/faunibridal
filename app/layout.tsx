@@ -37,8 +37,8 @@ export default async function RootLayout({
     {
       cookies: {
         get: (name: string) => cookieStore.get(name)?.value,
-        set: (name: string, value: string, options: any) => cookieStore.set(name, value, options),
-        remove: (name: string, options: any) => cookieStore.set(name, '', { ...options, maxAge: 0 }),
+        set: (name: string, value: string, options: { expires?: number }) => cookieStore.set(name, value, options),
+        remove: (name: string, options: { expires?: number }) => cookieStore.set(name, '', { ...options, maxAge: 0 }),
       },
     }
   )
