@@ -42,11 +42,7 @@ export default function NewCollectionPage() {
       const errorMessage = error instanceof Error 
         ? error.message
         : 'An error occurred while adding the collection. Please try again.';
-      toast({
-        title: "Error",
-        description: errorMessage,
-        variant: "destructive"
-      });
+      toast.error("Error", { description: errorMessage });
     } finally {
       setLoading(false)
     }
