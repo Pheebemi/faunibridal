@@ -4,6 +4,7 @@ import dressesData from '@/data/dresses.json'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ThemeToggle } from '@/components/theme-toggle'
+import { formatCurrency } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
 type Dress = {
@@ -59,7 +60,7 @@ export default function DressPage({ params }: { params: { id: string } }) {
 
           <div>
             <h1 className="text-3xl font-serif mb-2">{dress.name}</h1>
-            <p className="text-muted-foreground text-lg mb-4">${dress.price}</p>
+            <p className="text-muted-foreground text-lg mb-4">{formatCurrency(dress.price)}</p>
             <p className="mb-6">{dress.description}</p>
 
             <div className="flex items-center gap-4">

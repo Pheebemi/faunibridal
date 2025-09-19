@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { cookies } from "next/headers";
-import { createServerClient } from "@supabase/ssr";
-
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
-import { AuthProvider } from "@/lib/context/auth-context";
-import SupabaseProvider from "@/components/providers/supabase-provider";
 import WhatsAppButton from "@/components/ui/whatsapp-button"
 
 const geistSans = Geist({
@@ -30,33 +25,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies()
-
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        get: async (name: string) => cookieStore.get(name)?.value,
-        set: async (name: string, value: string, options: { expires?: number }) => cookieStore.set(name, value, options),
-        remove: async (name: string, options: { expires?: number }) => cookieStore.set(name, '', { ...options, maxAge: 0 }),
-      },
-    }
-  )
-
-  const { data: { session } } = await supabase.auth.getSession()
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem storageKey="algadaff-theme">
-          <SupabaseProvider initialSession={session}>
-            <AuthProvider>
-              {children}
-              <Toaster />
-              <WhatsAppButton phone="2348066337880" />
-            </AuthProvider>
-          </SupabaseProvider>
+          {children}
+          <Toaster />
+          <WhatsAppButton phone="2348066337880" />
         </ThemeProvider>
       </body>
     </html>

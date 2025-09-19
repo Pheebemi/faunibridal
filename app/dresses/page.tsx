@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import dressesData from '@/data/dresses.json'
 import { Badge } from '@/components/ui/badge'
+import { formatCurrency } from '@/lib/utils'
 import { ThemeToggle } from '@/components/theme-toggle'
 
 type Dress = {
@@ -69,7 +70,7 @@ export default function DressesPage({ searchParams }: { searchParams?: { page?: 
                 </div>
                 <div className="p-4">
                   <h3 className="text-lg font-semibold">{dress.name}</h3>
-                  <p className="text-muted-foreground mt-1">${dress.price}</p>
+                  <p className="text-muted-foreground mt-1">{formatCurrency(dress.price)}</p>
                 </div>
               </Link>
             </article>

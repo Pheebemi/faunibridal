@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from 'next/link'
 import dressesData from '@/data/dresses.json'
+import { formatCurrency } from '@/lib/utils'
 import { useState } from "react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
@@ -336,7 +337,7 @@ export default function HomePage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent">
                     <div className="absolute bottom-6 left-6 right-6">
                       <h3 className="font-serif text-2xl text-white mb-2">{dress.name}</h3>
-                      <p className="text-white/80 mb-4 text-sm">${dress.price}</p>
+                      <p className="text-white/80 mb-4 text-sm">{formatCurrency(dress.price)}</p>
                       <Link href={`/dresses/${dress.id}`}>
                         <Button variant="secondary" size="sm" className="bg-white/90 hover:bg-white text-[#C19B7C] hover:text-[#D4B098] font-serif">View Dress</Button>
                       </Link>

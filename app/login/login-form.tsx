@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { signIn } from "@/lib/supabase/auth"
+// Authentication disabled (Supabase removed)
 import { useAuth } from "@/lib/context/auth-context"
 import { toast } from "@/components/ui/toaster"
 
@@ -28,17 +28,10 @@ export default function LoginForm() {
     const email = formData.get("email") as string
     const password = formData.get("password") as string
 
-    try {
-      await signIn(email, password)
-      toast.success("Successfully logged in!")
-      router.refresh() // Refresh the router to update auth state
-      router.push("/admin")
-    } catch (error) {
-      console.error("Sign in error:", error)
-      toast.error(error instanceof Error ? error.message : "Failed to sign in")
-    } finally {
-      setIsLoading(false)
-    }
+    // No-op login for static site: redirect to admin for local/demo use
+    toast.success("Signed in (demo)")
+    router.push("/admin")
+    setIsLoading(false)
   }
 
   return (

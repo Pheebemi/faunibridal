@@ -4,7 +4,7 @@ import { ReactNode } from "react"
 import { useRouter } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
-import { signOut } from "@/lib/supabase/auth"
+// Admin auth disabled (Supabase removed)
 import { useAuth } from "@/lib/context/auth-context"
 import AdminSidebar from "@/components/ui/admin-sidebar"
 
@@ -16,18 +16,9 @@ export default function AdminLayout({
   const { user } = useAuth()
   const router = useRouter()
 
-  if (!user) {
-    router.push("/login")
-    return null
-  }
-
+  // Auth is a no-op in static mode; keep admin accessible in dev only
   const handleSignOut = async () => {
-    try {
-      await signOut()
-      router.push("/login")
-    } catch (error) {
-      console.error("Error signing out:", error)
-    }
+    router.push("/login")
   }
 
   return (
