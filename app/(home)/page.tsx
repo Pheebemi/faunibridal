@@ -137,7 +137,7 @@ export default function HomePage() {
 
       {/* Hero Carousel Section */}
       <section className="relative min-h-[calc(100vh-64px)] h-[calc(100vh-64px)] overflow-hidden">
-        <Carousel className="w-full h-full" opts={{ loop: true }}>
+  <Carousel className="w-full h-full" opts={{ loop: true }} autoplayInterval={4000}>
           <CarouselContent className="h-full">
             {/* Slide 1 */}
             <CarouselItem className="relative h-full">

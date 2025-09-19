@@ -10,7 +10,7 @@ type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
 type CarouselOptions = UseCarouselParameters[0]
 type CarouselPlugin = UseCarouselParameters[1]
 
-type CarouselProps = { opts?: CarouselOptions; plugins?: CarouselPlugin; orientation?: "horizontal" | "vertical"; setApi?: (api: CarouselApi) => void }
+type CarouselProps = { opts?: CarouselOptions; plugins?: CarouselPlugin; orientation?: "horizontal" | "vertical"; setApi?: (api: CarouselApi) => void; autoplayInterval?: number }
 
 type CarouselContextProps = {
   carouselRef: ReturnType<typeof useEmblaCarousel>[0]
@@ -28,10 +28,11 @@ function useCarousel() {
   return context
 }
 
-function Carousel({ orientation = "horizontal", opts, setApi, plugins, className, children, ...props }: React.ComponentProps<"div"> & CarouselProps) {
+function Carousel({ orientation = "horizontal", opts, setApi, plugins, autoplayInterval = 0, className, children, ...props }: React.ComponentProps<"div"> & CarouselProps) {
   const [carouselRef, api] = useEmblaCarousel({ ...opts, axis: orientation === "horizontal" ? "x" : "y" }, plugins)
   const [canScrollPrev, setCanScrollPrev] = React.useState(false)
   const [canScrollNext, setCanScrollNext] = React.useState(false)
+  const [isPaused, setIsPaused] = React.useState(false)
 
   const onSelect = React.useCallback((api: CarouselApi) => {
     if (!api) return
@@ -59,9 +60,35 @@ function Carousel({ orientation = "horizontal", opts, setApi, plugins, className
     return () => { api?.off("select", onSelect) }
   }, [api, onSelect])
 
+  // Autoplay: advance to next slide every `autoplayInterval` ms.
+  React.useEffect(() => {
+    if (!api) return
+    if (!autoplayInterval || autoplayInterval <= 0) return
+
+    const id = setInterval(() => {
+      if (isPaused) return
+      if (!api) return
+      if (api.canScrollNext && api.canScrollNext()) api.scrollNext()
+      else if (opts?.loop) api.scrollTo(0)
+    }, autoplayInterval)
+
+    return () => clearInterval(id)
+  }, [api, autoplayInterval, isPaused, opts])
+
   return (
     <CarouselContext.Provider value={{ carouselRef, api, opts, orientation: orientation || (opts?.axis === "y" ? "vertical" : "horizontal"), scrollPrev, scrollNext, canScrollPrev, canScrollNext }}>
-      <div onKeyDownCapture={handleKeyDown} className={cn("relative", className)} role="region" aria-roledescription="carousel" data-slot="carousel" {...props}>
+      <div
+        onKeyDownCapture={handleKeyDown}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onFocus={() => setIsPaused(true)}
+        onBlur={() => setIsPaused(false)}
+        className={cn("relative", className)}
+        role="region"
+        aria-roledescription="carousel"
+        data-slot="carousel"
+        {...props}
+      >
         {children}
       </div>
     </CarouselContext.Provider>
