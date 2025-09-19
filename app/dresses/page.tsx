@@ -123,9 +123,9 @@ export default function DressesPage({ searchParams }: { searchParams?: { page?: 
             <div>
               <h3 className="font-serif text-foreground mb-4">Contact</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>bridal@fauni.com</li>
-                <li>+1 (555) 123-4567</li>
-                <li>123 Bridal Lane, Fashion District</li>
+                <li>fauninigeria@gmail.com</li>
+                <li>08066337880</li>
+                <li>Shop No. 1 JBJ Complex, adjacent Mayogwoi Bridge, Hammaruwa Way, Jalingo</li>
               </ul>
             </div>
           </div>

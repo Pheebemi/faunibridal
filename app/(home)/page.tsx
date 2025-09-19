@@ -451,7 +451,7 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">Get In Touch</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Ready to start your technology journey? Contact us today to learn more about our training programs, solar solutions, and security services.
+              Ready to find your dream dress? Visit our showroom or reach out using the contact details below.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-12">
@@ -462,7 +462,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-foreground">Email Us</h3>
-                  <p className="text-muted-foreground">info@algaddaftech.com</p>
+                  <p className="text-muted-foreground">fauninigeria@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
@@ -471,7 +471,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-foreground">Call Us</h3>
-                  <p className="text-muted-foreground">+234 (0) 123 456 7890</p>
+                  <p className="text-muted-foreground">08066337880 • 08027289376</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
@@ -480,7 +480,7 @@ export default function HomePage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-foreground">Visit Us</h3>
-                  <p className="text-muted-foreground">Blueray plaza mile six jalingo, Taraba, Nigeria</p>
+                  <p className="text-muted-foreground">Shop No. 1 JBJ Complex, adjacent Mayogwoi Bridge, Hammaruwa Way, Jalingo</p>
                 </div>
               </div>
             </div>
@@ -542,10 +542,9 @@ export default function HomePage() {
             <div>
               <h3 className="font-serif text-foreground mb-4">Contact</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>bridal@fauni.com</li>
-                <li>+1 (555) 123-4567</li>
-                <li>123 Bridal Lane, Fashion District</li>
-                <li>New York, NY 10001</li>
+                <li>fauninigeria@gmail.com</li>
+                <li>08066337880</li>
+                <li>Shop No. 1 JBJ Complex, adjacent Mayogwoi Bridge, Hammaruwa Way, Jalingo</li>
               </ul>
             </div>
           </div>

@@ -54,7 +54,7 @@ export default async function RootLayout({
             <AuthProvider>
               {children}
               <Toaster />
-              <WhatsAppButton phone="15551234567" />
+              <WhatsAppButton phone="2348066337880" />
             </AuthProvider>
           </SupabaseProvider>
         </ThemeProvider>

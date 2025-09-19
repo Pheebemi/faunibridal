@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-const DEFAULT_PHONE = "2348027289376" // Replace with owner phone in international format, e.g. 15551234567
+const DEFAULT_PHONE = "2348066337880" // Owner phone in international format (+2348066337880)
 
 export default function WhatsAppButton({ phone = DEFAULT_PHONE }: { phone?: string }) {
   const href = `https://wa.me/${phone}`
