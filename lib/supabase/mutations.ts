@@ -7,6 +7,12 @@ type Dress = Database['public']['Tables']['dresses']['Row']
 // Collections API
 export async function addCollection(collection: Partial<Collection>) {
   const supabase = createClient()
+  // Ensure the user is authenticated before attempting to insert.
+  const { data: sessionData } = await supabase.auth.getSession()
+  if (!sessionData?.session) {
+    throw new Error('Not authenticated — please sign in to add a collection.')
+  }
+
   const { data, error } = await supabase
     .from('collections')
     .insert([collection])
@@ -43,6 +49,12 @@ export async function deleteCollection(id: string) {
 // Dresses API
 export async function addDress(dress: Partial<Dress>) {
   const supabase = createClient()
+  // Ensure the user is authenticated before attempting to insert.
+  const { data: sessionData } = await supabase.auth.getSession()
+  if (!sessionData?.session) {
+    throw new Error('Not authenticated — please sign in to add a dress.')
+  }
+
   const { data, error } = await supabase
     .from('dresses')
     .insert([dress])

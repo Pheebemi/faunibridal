@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
+import { toast } from '@/components/ui/toaster'
 import { addCollection } from '@/lib/supabase/mutations'
 import { uploadCollectionImage } from '@/lib/supabase/storage'
 import Image from 'next/image'
@@ -37,6 +38,15 @@ export default function NewCollectionPage() {
       router.refresh()
     } catch (error) {
       console.error('Error adding collection:', error)
+      // Create a more user-friendly error message
+      const errorMessage = error instanceof Error 
+        ? error.message
+        : 'An error occurred while adding the collection. Please try again.';
+      toast({
+        title: "Error",
+        description: errorMessage,
+        variant: "destructive"
+      });
     } finally {
       setLoading(false)
     }

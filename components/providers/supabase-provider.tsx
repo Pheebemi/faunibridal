@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from 'react'
 import { Session } from '@supabase/supabase-js'
-import { supabase } from '@/lib/supabase/client'
+import { createClient } from '@/lib/supabase/client'
 
 interface SupabaseContext {
   session: Session | null
@@ -20,6 +20,8 @@ export default function SupabaseProvider({
   const [session, setSession] = useState<Session | null>(initialSession)
 
   useEffect(() => {
+    const supabase = createClient()
+
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
     })

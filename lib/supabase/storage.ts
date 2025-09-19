@@ -35,9 +35,39 @@ export async function initStorage() {
   }
 }
 
+import type { SupabaseClient } from '@supabase/supabase-js'
+
+async function ensureBucketExists(supabase: SupabaseClient, bucketName: string) {
+  try {
+    // Try to get bucket (to check if it exists)
+    const { data: bucket, error: getBucketError } = await supabase
+      .storage
+      .getBucket(bucketName)
+
+    if (!bucket) {
+      // Bucket doesn't exist, create it
+      const { data, error: createError } = await supabase
+        .storage
+        .createBucket(bucketName, {
+          public: true,
+          fileSizeLimit: 1024 * 1024 * 2, // 2MB
+          allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp']
+        })
+
+      if (createError) throw createError
+    }
+  } catch (error) {
+    console.error(`Error ensuring bucket ${bucketName} exists:`, error)
+    throw error
+  }
+}
+
 export async function uploadCollectionImage(file: File) {
   const supabase = createClient()
   
+  // Ensure bucket exists before upload
+  await ensureBucketExists(supabase, COLLECTION_IMAGES_BUCKET)
+
   // Generate a unique file name
   const fileExt = file.name.split('.').pop()
   const fileName = `${uuidv4()}.${fileExt}`
@@ -62,6 +92,9 @@ export async function uploadCollectionImage(file: File) {
 export async function uploadDressImage(file: File) {
   const supabase = createClient()
   
+  // Ensure bucket exists before upload
+  await ensureBucketExists(supabase, DRESS_IMAGES_BUCKET)
+
   // Generate a unique file name
   const fileExt = file.name.split('.').pop()
   const fileName = `${uuidv4()}.${fileExt}`

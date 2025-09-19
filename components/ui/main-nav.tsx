@@ -4,28 +4,7 @@ import Link from "next/link"
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "./navigation-menu"
 import { cn } from "@/lib/utils"
 
-const collections = [
-  {
-    title: "Wedding Dresses",
-    href: "/collections/wedding-dresses",
-    description: "Discover our stunning collection of wedding dresses for your special day."
-  },
-  {
-    title: "Veils & Accessories",
-    href: "/collections/accessories",
-    description: "Complete your bridal look with our beautiful accessories."
-  },
-  {
-    title: "Bridesmaid Dresses",
-    href: "/collections/bridesmaid",
-    description: "Elegant dresses for your bridal party."
-  },
-  {
-    title: "Evening Wear",
-    href: "/collections/evening-wear",
-    description: "Luxurious dresses for special occasions."
-  },
-]
+// Navigation simplified: single Dresses link (static dresses list)
 
 const ListItem = ({ className, title, children, ...props }: React.ComponentPropsWithoutRef<"a"> & { title: string }) => {
   return (
@@ -53,20 +32,11 @@ export function MainNav() {
     <NavigationMenu className="max-w-none w-full justify-start">
       <NavigationMenuList className="gap-6">
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Collections</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
-              {collections.map((collection) => (
-                <ListItem
-                  key={collection.title}
-                  title={collection.title}
-                  href={collection.href}
-                >
-                  {collection.description}
-                </ListItem>
-              ))}
-            </ul>
-          </NavigationMenuContent>
+          <Link href="/dresses" legacyBehavior passHref>
+            <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50">
+              Dresses
+            </NavigationMenuLink>
+          </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href="/appointment" legacyBehavior passHref>

@@ -1,6 +1,8 @@
 "use client"
 
 import Image from "next/image"
+import Link from 'next/link'
+import dressesData from '@/data/dresses.json'
 import { useState } from "react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
@@ -160,12 +162,16 @@ export default function HomePage() {
                     designed to make your special day unforgettable.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <Button size="lg" className="text-lg px-8 py-6 bg-[#D4B098] hover:bg-[#C19B7C] text-white font-serif">
-                      View Collection
-                    </Button>
-                    <Button variant="outline" size="lg" className="text-lg px-8 py-6 border-2 border-white/30 text-white hover:bg-white hover:text-[#C19B7C] backdrop-blur-sm font-serif transition-all duration-300">
-                      Book Appointment
-                    </Button>
+                    <Link href="/dresses">
+                      <Button size="lg" className="text-lg px-8 py-6 bg-[#D4B098] hover:bg-[#C19B7C] text-white font-serif">
+                        View Dresses
+                      </Button>
+                    </Link>
+                    <Link href="/appointments">
+                      <Button variant="outline" size="lg" className="text-lg px-8 py-6 border-2 border-white/30 text-white hover:bg-white hover:text-[#C19B7C] backdrop-blur-sm font-serif transition-all duration-300">
+                        Book Appointment
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -194,9 +200,11 @@ export default function HomePage() {
                     Timeless silhouettes and traditional designs that never go out of style.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <Button size="lg" className="text-lg px-8 py-6 bg-[#D4B098] hover:bg-[#C19B7C] text-white font-serif">
-                      Explore Collection
-                    </Button>
+                    <Link href="/dresses">
+                      <Button size="lg" className="text-lg px-8 py-6 bg-[#D4B098] hover:bg-[#C19B7C] text-white font-serif">
+                        View Dresses
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -225,9 +233,11 @@ export default function HomePage() {
                     Contemporary designs for the modern bride who dares to be different.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <Button size="lg" className="text-lg px-8 py-6 bg-[#D4B098] hover:bg-[#C19B7C] text-white font-serif">
-                      View Collection
-                    </Button>
+                    <Link href="/dresses">
+                      <Button size="lg" className="text-lg px-8 py-6 bg-[#D4B098] hover:bg-[#C19B7C] text-white font-serif">
+                        View Dresses
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -310,89 +320,45 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Collections Section */}
-      <section id="collections" className="py-20 px-4 bg-muted/30">
+      {/* Featured Dresses Section */}
+      <section id="featured-dresses" className="py-20 px-4">
         <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-light text-foreground mb-4 font-serif">Our Collections</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Discover our latest bridal collections, each carefully curated to help you find the perfect dress for your special day.
-            </p>
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-light text-foreground mb-4 font-serif">Featured Dresses</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">Handpicked gowns to inspire your wedding day look.</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {/* Classic Collection */}
-            <Card className="group relative overflow-hidden rounded-xl hover:shadow-xl transition-all duration-500">
-              <div className="aspect-[3/4] relative">
-                <Image
-                  src="https://images.unsplash.com/photo-1594552072238-b8a33785b261?auto=format&fit=crop&w=987&q=80"
-                  alt="Classic Collection"
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent">
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <h3 className="font-serif text-2xl text-white mb-2">Classic Collection</h3>
-                    <p className="text-white/80 mb-4 text-sm">Timeless elegance for the traditional bride</p>
-                    <Button variant="secondary" size="sm" className="bg-white/90 hover:bg-white text-[#C19B7C] hover:text-[#D4B098] font-serif">
-                      View Collection
-                    </Button>
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {dressesData.slice(0, 3).map((dress) => (
+              <div key={dress.id} className="group relative overflow-hidden rounded-xl hover:shadow-xl transition-all duration-500">
+                <div className="aspect-[3/4] relative">
+                  <Image src={dress.image} alt={dress.name} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent">
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <h3 className="font-serif text-2xl text-white mb-2">{dress.name}</h3>
+                      <p className="text-white/80 mb-4 text-sm">${dress.price}</p>
+                      <Link href={`/dresses/${dress.id}`}>
+                        <Button variant="secondary" size="sm" className="bg-white/90 hover:bg-white text-[#C19B7C] hover:text-[#D4B098] font-serif">View Dress</Button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
-            </Card>
-
-            {/* Modern Collection */}
-            <Card className="group relative overflow-hidden rounded-xl hover:shadow-xl transition-all duration-500">
-              <div className="aspect-[3/4] relative">
-                <Image
-                  src="https://images.unsplash.com/photo-1595981234058-a9302fb97229?auto=format&fit=crop&w=987&q=80"
-                  alt="Modern Collection"
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent">
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <h3 className="font-serif text-2xl text-white mb-2">Modern Romance</h3>
-                    <p className="text-white/80 mb-4 text-sm">Contemporary designs for the modern bride</p>
-                    <Button variant="secondary" size="sm" className="bg-white/90 hover:bg-white text-[#C19B7C] hover:text-[#D4B098] font-serif">
-                      View Collection
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </Card>
-
-            {/* Luxury Collection */}
-            <Card className="group relative overflow-hidden rounded-xl hover:shadow-xl transition-all duration-500">
-              <div className="aspect-[3/4] relative">
-                <Image
-                  src="https://images.unsplash.com/photo-1596341960213-3d048aa309b6?auto=format&fit=crop&w=987&q=80"
-                  alt="Luxury Collection"
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent">
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <h3 className="font-serif text-2xl text-white mb-2">Luxury Collection</h3>
-                    <p className="text-white/80 mb-4 text-sm">Opulent designs for an unforgettable day</p>
-                    <Button variant="secondary" size="sm" className="bg-white/90 hover:bg-white text-[#C19B7C] hover:text-[#D4B098] font-serif">
-                      View Collection
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </Card>
+            ))}
           </div>
 
           <div className="text-center">
-            <Button variant="outline" size="lg" className="font-serif text-[#C19B7C] hover:text-[#D4B098] border-[#C19B7C] hover:border-[#D4B098]">
-              View All Collections
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+            <Link href="/dresses">
+              <Button variant="outline" size="lg" className="font-serif text-[#C19B7C] hover:text-[#D4B098] border-[#C19B7C] hover:border-[#D4B098]">
+                View All Dresses
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
+
+      {/* Collections section removed — site now shows dresses only */}
 
 
 
@@ -555,13 +521,13 @@ export default function HomePage() {
               <p className="text-muted-foreground text-sm">Creating timeless moments with exquisite bridal wear that celebrates your unique style and beauty.</p>
             </div>
             <div>
-              <h3 className="font-serif text-foreground mb-4">Collections</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>Classic Collection</li>
-                <li>Modern Romance</li>
-                <li>Luxury Collection</li>
-                <li>Accessories</li>
-              </ul>
+              <h3 className="font-serif text-foreground mb-4">Dresses</h3>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li>New Arrivals</li>
+                  <li>Best Sellers</li>
+                  <li>Exclusive</li>
+                  <li>Accessories</li>
+                </ul>
             </div>
             <div>
               <h3 className="font-serif text-foreground mb-4">Information</h3>

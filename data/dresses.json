@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "name": "Aurora",
+    "description": "Elegant A-line wedding dress with lace bodice and tulle skirt.",
+    "price": 2499,
+    "image": "/dresses/aurora.jpg"
+  },
+  {
+    "id": "2",
+    "name": "Celeste",
+    "description": "Romantic mermaid silhouette with floral appliqué.",
+    "price": 2999,
+    "image": "/dresses/celeste.jpg"
+  },
+  {
+    "id": "3",
+    "name": "Isla",
+    "description": "Boho-chic sheath dress with delicate beading.",
+    "price": 1999,
+    "image": "/dresses/isla.jpg"
+  }
+]

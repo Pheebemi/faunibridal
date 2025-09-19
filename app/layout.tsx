@@ -29,16 +29,16 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = cookies()
-  
+  const cookieStore = await cookies()
+
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        get: (name: string) => cookieStore.get(name)?.value,
-        set: (name: string, value: string, options: { expires?: number }) => cookieStore.set(name, value, options),
-        remove: (name: string, options: { expires?: number }) => cookieStore.set(name, '', { ...options, maxAge: 0 }),
+        get: async (name: string) => cookieStore.get(name)?.value,
+        set: async (name: string, value: string, options: { expires?: number }) => cookieStore.set(name, value, options),
+        remove: async (name: string, options: { expires?: number }) => cookieStore.set(name, '', { ...options, maxAge: 0 }),
       },
     }
   )
