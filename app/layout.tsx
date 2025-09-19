@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/lib/context/auth-context";
 import SupabaseProvider from "@/components/providers/supabase-provider";
+import WhatsAppButton from "@/components/ui/whatsapp-button"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -53,6 +54,7 @@ export default async function RootLayout({
             <AuthProvider>
               {children}
               <Toaster />
+              <WhatsAppButton phone="15551234567" />
             </AuthProvider>
           </SupabaseProvider>
         </ThemeProvider>
