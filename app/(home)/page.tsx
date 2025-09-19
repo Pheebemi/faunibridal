@@ -141,7 +141,7 @@ export default function HomePage() {
             {/* Slide 1 */}
             <CarouselItem className="relative h-full">
               <div className="relative h-full flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=2071&q=80')" }}></div>
+                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/dresses/1.jpg')" }}></div>
                 <div className="absolute inset-0 bg-black/20"></div>
                 <div className="absolute inset-0">
                   <div className="absolute top-20 left-10 w-72 h-72 bg-[#D4B098]/20 rounded-full blur-3xl animate-pulse"></div>
@@ -180,7 +180,7 @@ export default function HomePage() {
             {/* Slide 2 */}
             <CarouselItem className="relative h-full">
               <div className="relative h-full flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1549416878-b9ca95e26903?auto=format&fit=crop&w=2070&q=80')" }}></div>
+                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/dresses/2.jpg')" }}></div>
                 <div className="absolute inset-0 bg-black/20"></div>
                 <div className="absolute inset-0">
                   <div className="absolute top-32 right-20 w-80 h-80 bg-[#D4B098]/20 rounded-full blur-3xl animate-pulse"></div>
@@ -213,7 +213,7 @@ export default function HomePage() {
             {/* Slide 3 */}
             <CarouselItem className="relative h-full">
               <div className="relative h-full flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1595981234058-a9302fb97229?auto=format&fit=crop&w=2070&q=80')" }}></div>
+                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/dresses/3.jpg')" }}></div>
                 <div className="absolute inset-0 bg-black/20"></div>
                 <div className="absolute inset-0">
                   <div className="absolute top-20 right-10 w-96 h-96 bg-[#D4B098]/20 rounded-full blur-3xl animate-pulse"></div>
@@ -376,7 +376,7 @@ export default function HomePage() {
                 <CardHeader>
                   <div className="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4">
                     <Image
-                      src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&h=300&q=80"
+                      src="/dresses/1.jpg"
                       alt="Sarah Johnson"
                       width={64}
                       height={64}
@@ -387,7 +387,7 @@ export default function HomePage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground italic">
-                    "I felt like a princess in my Fauni Bridal gown. The attention to detail and personalized service made my dress shopping experience unforgettable."
+                    &quot;I felt like a princess in my Fauni Bridal gown. The attention to detail and personalized service made my dress shopping experience unforgettable.&quot;
                   </p>
                 </CardContent>
               </Card>
@@ -407,7 +407,7 @@ export default function HomePage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground italic">
-                    "The team at Fauni Bridal helped me find the perfect dress that matched my style perfectly. I couldn't be happier with my choice!"
+                    &quot;The team at Fauni Bridal helped me find the perfect dress that matched my style perfectly. I couldn&#39;t be happier with my choice!&quot;
                   </p>
                 </CardContent>
               </Card>
@@ -427,7 +427,7 @@ export default function HomePage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground italic">
-                    "From the moment I walked in, I knew I was in good hands. The collection is stunning and the service is exceptional."
+                    &quot;From the moment I walked in, I knew I was in good hands. The collection is stunning and the service is exceptional.&quot;
                   </p>
                 </CardContent>
               </Card>

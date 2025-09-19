@@ -6,8 +6,16 @@ import Link from 'next/link'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
 
+type Dress = {
+  id: string
+  name: string
+  description?: string
+  price: number
+  image: string
+}
+
 export default function DressPage({ params }: { params: { id: string } }) {
-  const dresses = dressesData as any[]
+  const dresses = dressesData as Dress[]
   const dress = dresses.find((d) => d.id === params.id)
 
   if (!dress) {

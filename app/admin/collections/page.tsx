@@ -17,7 +17,11 @@ export default async function CollectionsPage() {
     // Preserve useful error information from Supabase (which may not be a real Error)
     let message = 'Failed to fetch collections'
     if (err instanceof Error) message = err.message
-    else if (err && typeof err === 'object' && 'message' in err) message = (err as any).message
+    else if (err && typeof err === 'object' && 'message' in err) {
+      const maybeMessage = (err as { message?: unknown }).message
+      if (typeof maybeMessage === 'string') message = maybeMessage
+      else if (maybeMessage != null) message = String(maybeMessage)
+    }
     else {
       try {
         message = JSON.stringify(err)

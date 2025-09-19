@@ -3,15 +3,21 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import dressesData from '@/data/dresses.json'
-import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
 import { ThemeToggle } from '@/components/theme-toggle'
+
+type Dress = {
+  id: string
+  name: string
+  description?: string
+  price: number
+  image: string
+}
 
 const PAGE_SIZE = 6
 
 export default function DressesPage({ searchParams }: { searchParams?: { page?: string } }) {
-  const dresses = dressesData as any[]
+  const dresses = dressesData as Dress[]
   const page = Math.max(1, Number(searchParams?.page ?? 1))
   const start = (page - 1) * PAGE_SIZE
   const paginated = dresses.slice(start, start + PAGE_SIZE)

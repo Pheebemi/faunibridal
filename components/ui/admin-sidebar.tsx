@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, Shirt, Grid2x2 } from "lucide-react"
+import { LayoutDashboard, Shirt } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const navigation = [
