@@ -9,7 +9,7 @@ export async function initStorage() {
   const supabase = createClient()
 
   // Create collection images bucket if it doesn't exist
-  const { data: collectionBucket, error: collectionError } = await supabase
+  const { error: collectionError } = await supabase
     .storage
     .createBucket(COLLECTION_IMAGES_BUCKET, {
       public: true,
@@ -22,7 +22,7 @@ export async function initStorage() {
   }
 
   // Create dress images bucket if it doesn't exist
-  const { data: dressBucket, error: dressError } = await supabase
+  const { error: dressError } = await supabase
     .storage
     .createBucket(DRESS_IMAGES_BUCKET, {
       public: true,
@@ -40,13 +40,13 @@ import type { SupabaseClient } from '@supabase/supabase-js'
 async function ensureBucketExists(supabase: SupabaseClient, bucketName: string) {
   try {
     // Try to get bucket (to check if it exists)
-    const { data: bucket, error: getBucketError } = await supabase
+    const { data: bucket } = await supabase
       .storage
       .getBucket(bucketName)
 
     if (!bucket) {
       // Bucket doesn't exist, create it
-      const { data, error: createError } = await supabase
+      const { error: createError } = await supabase
         .storage
         .createBucket(bucketName, {
           public: true,
@@ -73,7 +73,7 @@ export async function uploadCollectionImage(file: File) {
   const fileName = `${uuidv4()}.${fileExt}`
 
   // Upload the file
-  const { data, error } = await supabase
+  const { error } = await supabase
     .storage
     .from(COLLECTION_IMAGES_BUCKET)
     .upload(fileName, file)
@@ -100,7 +100,7 @@ export async function uploadDressImage(file: File) {
   const fileName = `${uuidv4()}.${fileExt}`
 
   // Upload the file
-  const { data, error } = await supabase
+  const { error } = await supabase
     .storage
     .from(DRESS_IMAGES_BUCKET)
     .upload(fileName, file)

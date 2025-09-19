@@ -141,7 +141,7 @@ export default function HomePage() {
             {/* Slide 1 */}
             <CarouselItem className="relative h-full">
               <div className="relative h-full flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/dresses/1.jpg')" }}></div>
+                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/dresses/6.jpg')" }}></div>
                 <div className="absolute inset-0 bg-black/20"></div>
                 <div className="absolute inset-0">
                   <div className="absolute top-20 left-10 w-72 h-72 bg-[#D4B098]/20 rounded-full blur-3xl animate-pulse"></div>
@@ -488,7 +488,7 @@ export default function HomePage() {
             <Card className="p-6">
               <CardHeader>
                 <CardTitle>Send us a Message</CardTitle>
-                <CardDescription>We'd love to hear from you. Send us a message and we'll respond as soon as possible.</CardDescription>
+                <CardDescription>We&#39;d love to hear from you. Send us a message and we&#39;ll respond as soon as possible.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
