@@ -1,67 +1,14 @@
-import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-export async function middleware(request: NextRequest) {
-  const response = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
-  })
-
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        get(name: string) {
-          return request.cookies.get(name)?.value
-        },
-        set(name: string, value: string, options: CookieOptions) {
-          response.cookies.set({
-            name,
-            value,
-            ...options,
-          })
-        },
-        remove(name: string, options: CookieOptions) {
-          response.cookies.set({
-            name,
-            value: '',
-            ...options,
-          })
-        },
-      },
-    }
-  )
-
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
-
-  // If not authenticated and trying to access admin routes
-  if (!session && request.nextUrl.pathname.startsWith('/admin')) {
-    const redirectUrl = new URL('/login', request.url)
-    redirectUrl.searchParams.set('from', request.nextUrl.pathname)
-    return NextResponse.redirect(redirectUrl)
-  }
-
-  // If authenticated and trying to access login
-  if (session && request.nextUrl.pathname === '/login') {
-    return NextResponse.redirect(new URL('/admin', request.url))
-  }
-
-  return response
+export function middleware(request: NextRequest) {
+  // Minimal pass-through middleware.
+  // Authentication/middleware behavior was removed for static deployment.
+  return NextResponse.next()
 }
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public (public files)
-     */
+    // Match all request paths except Next static/assets and public files
     '/((?!_next/static|_next/image|favicon.ico|public).*)',
   ],
 }
