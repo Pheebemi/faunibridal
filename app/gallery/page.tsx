@@ -34,7 +34,7 @@ export default function GalleryPage() {
         <Gallery images={images} />
 
         <section className="mt-10 max-w-3xl mx-auto text-center">
-          <p className="text-lg">Love what you see? <a className="underline" href="/appointment">Book an appointment</a> or <a className="underline" href="/contact">contact us</a> for custom requests.</p>
+          <p className="text-lg">Love what you see? <a className="underline" href="/appointments">Book an appointment</a> or <a className="underline" href="/contact">contact us</a> for custom requests.</p>
         </section>
       </main>
 
