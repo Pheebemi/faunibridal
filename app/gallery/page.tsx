@@ -3,7 +3,7 @@ import Footer from "@/components/footer"
 import Gallery from "@/components/ui/gallery"
 
 export const metadata = {
-  title: "Gallery — Fauni Bridal",
+  title: "Gallery — FAUNi Bridals",
   description: "Browse our curated selection of bridal gowns.",
 }
 

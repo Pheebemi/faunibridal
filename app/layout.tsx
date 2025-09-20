@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Fauni Bridal — Luxury Wedding Dresses",
+  title: "FAUNi Bridals — Luxury Wedding Dresses",
   description: "Luxury handcrafted wedding dresses and bridal services.",
 };
 

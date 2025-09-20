@@ -34,6 +34,7 @@ import {
   CalendarHeart,
   Crown,
 } from "lucide-react"
+import Footer from '@/components/footer'
 
 export default function HomePage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -48,8 +49,8 @@ export default function HomePage() {
               <div className="h-10 w-10 bg-gradient-to-br from-[#D4B098] to-[#C19B7C] rounded-lg flex items-center justify-center">
                 <span className="text-white font-serif italic text-lg">F</span>
               </div>
-              <div>
-                <span className="text-xl font-serif italic text-foreground">Fauni Bridal</span>
+                <div>
+                <span className="text-xl font-serif italic text-foreground">FAUNi Bridals</span>
                 <div className="text-xs text-muted-foreground -mt-1">Luxury Wedding Dresses</div>
               </div>
             </div>
@@ -125,6 +126,9 @@ export default function HomePage() {
                     {link.label}
                   </a>
                 ))}
+                <div className="pt-4 border-t">
+                  <Button className="w-full bg-[#D4B098] hover:bg-[#C19B7C] text-white">Book Appointment</Button>
+                </div>
                 <div className="pt-4 border-t">
                   <Button className="w-full bg-[#D4B098] hover:bg-[#C19B7C] text-white">Book Appointment</Button>
                 </div>
@@ -264,7 +268,7 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-light text-foreground mb-4 font-serif">Our Story</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              At Fauni Bridal, we believe every bride deserves to feel extraordinary on her special day. Our collection of handcrafted wedding dresses combines timeless elegance with modern sophistication.
+              At FAUNi, we believe every bride deserves to feel extraordinary on her special day. Our collection of handcrafted wedding dresses combines timeless elegance with modern sophistication.
             </p>
           </div>
 
@@ -373,7 +377,7 @@ export default function HomePage() {
           <div className="max-w-4xl mx-auto">
             <div className="mb-16">
               <h2 className="text-4xl font-light text-foreground mb-4 font-serif">Real Brides</h2>
-              <p className="text-xl text-muted-foreground">Hear from our beautiful brides about their experience with Fauni Bridal.</p>
+              <p className="text-xl text-muted-foreground">Hear from our beautiful brides about their experience with FAUNi Bridals.</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 mb-12">
@@ -392,7 +396,7 @@ export default function HomePage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground italic">
-                    &quot;I felt like a princess in my Fauni Bridal gown. The attention to detail and personalized service made my dress shopping experience unforgettable.&quot;
+                    &quot;I felt like a princess in my FAUNi Bridals gown. The attention to detail and personalized service made my dress shopping experience unforgettable.&quot;
                   </p>
                 </CardContent>
               </Card>
@@ -412,7 +416,7 @@ export default function HomePage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground italic">
-                    &quot;The team at Fauni Bridal helped me find the perfect dress that matched my style perfectly. I couldn&#39;t be happier with my choice!&quot;
+                    &quot;The team at FAUNi Bridals helped me find the perfect dress that matched my style perfectly. I couldn&#39;t be happier with my choice!&quot;
                   </p>
                 </CardContent>
               </Card>
@@ -510,53 +514,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t bg-muted/30 py-12 px-4">
-        <div className="container mx-auto">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="h-8 w-8 bg-gradient-to-br from-[#D4B098] to-[#C19B7C] rounded-lg flex items-center justify-center">
-                  <span className="text-white font-serif italic text-sm">F</span>
-                </div>
-                <div>
-                  <span className="text-xl font-serif italic text-foreground">Fauni Bridal</span>
-                  <div className="text-xs text-muted-foreground -mt-1">Luxury Wedding Dresses</div>
-                </div>
-              </div>
-              <p className="text-muted-foreground text-sm">Creating timeless moments with exquisite bridal wear that celebrates your unique style and beauty.</p>
-            </div>
-            <div>
-              <h3 className="font-serif text-foreground mb-4">Dresses</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>New Arrivals</li>
-                  <li>Best Sellers</li>
-                  <li>Exclusive</li>
-                  <li>Accessories</li>
-                </ul>
-            </div>
-            <div>
-              <h3 className="font-serif text-foreground mb-4">Information</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>Book Appointment</li>
-                <li>Size Guide</li>
-                <li>Wedding Timeline</li>
-                <li>FAQs</li>
-                <li>Our Story</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-serif text-foreground mb-4">Contact</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>fauninigeria@gmail.com</li>
-                <li>08066337880</li>
-                <li>Shop No. 1 JBJ Complex, adjacent Mayogwoi Bridge, Hammaruwa Way, Jalingo</li>
-              </ul>
-            </div>
-          </div>
-          <Separator className="my-8" />
-          <div className="text-center text-sm text-muted-foreground">© 2025 Fauni Bridal. All rights reserved. | Luxury Wedding Dresses • Bridal Accessories • Bespoke Service</div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

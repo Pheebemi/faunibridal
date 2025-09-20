@@ -37,7 +37,7 @@ export default function DressPage({ params }: { params: { id: string } }) {
                 <span className="text-white font-serif italic text-lg">F</span>
               </div>
               <div>
-                <Link href="/" className="text-xl font-serif italic">Fauni Bridal</Link>
+                <Link href="/" className="text-xl font-serif italic">FAUNi Bridals</Link>
                 <div className="text-xs text-muted-foreground -mt-1">Luxury Wedding Dresses</div>
               </div>
             </div>
@@ -82,7 +82,7 @@ export default function DressPage({ params }: { params: { id: string } }) {
                   <span className="text-white font-serif italic text-sm">F</span>
                 </div>
                 <div>
-                  <span className="text-xl font-serif italic text-foreground">Fauni Bridal</span>
+                  <span className="text-xl font-serif italic text-foreground">FAUNi Bridals</span>
                   <div className="text-xs text-muted-foreground -mt-1">Luxury Wedding Dresses</div>
                 </div>
               </div>

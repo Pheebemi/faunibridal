@@ -6,7 +6,7 @@ import Footer from '@/components/footer'
 import { Button } from '@/components/ui/button'
 
 export const metadata = {
-  title: 'Collections — Fauni Bridal',
+  title: 'Collections — FAUNi Bridals',
   description: 'Explore our curated collections.',
 }
 
@@ -17,7 +17,7 @@ export default function CollectionsPage() {
 
       <main className="container mx-auto py-12 px-4 flex-1">
         <header className="max-w-3xl mx-auto text-center mb-8">
-          <h1 className="text-3xl font-semibold">Fauni Bridal Collections</h1>
+          <h1 className="text-3xl font-semibold">FAUNi Bridals Collections</h1>
           <p className="mt-3 text-muted-foreground">Discover curated collections for every moment of your wedding journey.</p>
         </header>
 

@@ -48,8 +48,8 @@ export default function DressesPage({ searchParams }: { searchParams?: { page?: 
               <div className="h-10 w-10 bg-gradient-to-br from-[#D4B098] to-[#C19B7C] rounded-lg flex items-center justify-center">
                 <span className="text-white font-serif italic text-lg">F</span>
               </div>
-              <div>
-                <Link href="/" className="text-xl font-serif italic">Fauni Bridal</Link>
+                <div>
+                <Link href="/" className="text-xl font-serif italic">FAUNi Bridals</Link>
                 <div className="text-xs text-muted-foreground -mt-1">Luxury Wedding Dresses</div>
               </div>
             </div>
@@ -131,7 +131,7 @@ export default function DressesPage({ searchParams }: { searchParams?: { page?: 
                   <span className="text-white font-serif italic text-sm">F</span>
                 </div>
                 <div>
-                  <span className="text-xl font-serif italic text-foreground">Fauni Bridal</span>
+                  <span className="text-xl font-serif italic text-foreground">FAUNi Bridals</span>
                   <div className="text-xs text-muted-foreground -mt-1">Luxury Wedding Dresses</div>
                 </div>
               </div>
