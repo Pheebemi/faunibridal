@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from 'next/link'
 import dressesData from '@/data/dresses.json'
+import collections from '@/data/collections.json'
 import { formatCurrency } from '@/lib/utils'
 import { useState } from "react"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -321,26 +322,31 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Dresses Section */}
-      <section id="featured-dresses" className="py-20 px-4">
+      {/* Collections Section (replaces Featured Dresses) */}
+      <section id="collections" className="py-20 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-light text-foreground mb-4 font-serif">Featured Dresses</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">Handpicked gowns to inspire your wedding day look.</p>
+            <h2 className="text-4xl font-light text-foreground mb-4 font-serif">Collections</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">Explore our curated collections crafted for every part of your wedding journey.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
-            {dressesData.slice(0, 3).map((dress) => (
-              <div key={dress.id} className="group relative overflow-hidden rounded-xl hover:shadow-xl transition-all duration-500">
+            {collections.map((col) => (
+              <div key={col.id} className="group relative overflow-hidden rounded-xl hover:shadow-xl transition-all duration-500">
                 <div className="aspect-[3/4] relative">
-                  <Image src={dress.image} alt={dress.name} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <Image src={col.image} alt={col.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent">
                     <div className="absolute bottom-6 left-6 right-6">
-                      <h3 className="font-serif text-2xl text-white mb-2">{dress.name}</h3>
-                      <p className="text-white/80 mb-4 text-sm">{formatCurrency(dress.price)}</p>
-                      <Link href={`/dresses/${dress.id}`}>
-                        <Button variant="secondary" size="sm" className="bg-white/90 hover:bg-white text-[#C19B7C] hover:text-[#D4B098] font-serif">View Dress</Button>
-                      </Link>
+                      <h3 className="font-serif text-2xl text-white mb-2">{col.title}</h3>
+                      <p className="text-white/80 mb-4 text-sm">{col.description}</p>
+                      <div className="flex gap-3">
+                        <Link href={`/collections/${col.id}`}>
+                          <Button variant="secondary" size="sm" className="bg-white/90 hover:bg-white text-[#C19B7C] hover:text-[#D4B098] font-serif">Learn More</Button>
+                        </Link>
+                        <Link href="/dresses">
+                          <Button variant="outline" size="sm" className="text-white border-white/30 font-serif">View Dresses</Button>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -349,9 +355,9 @@ export default function HomePage() {
           </div>
 
           <div className="text-center">
-            <Link href="/dresses">
+            <Link href="/collections">
               <Button variant="outline" size="lg" className="font-serif text-[#C19B7C] hover:text-[#D4B098] border-[#C19B7C] hover:border-[#D4B098]">
-                View All Dresses
+                View All Collections
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>

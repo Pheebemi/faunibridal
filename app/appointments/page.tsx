@@ -3,6 +3,9 @@
 import { useState } from "react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
 
 export default function AppointmentsPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", date: "", time: "", message: "" })
@@ -41,24 +44,24 @@ export default function AppointmentsPage() {
 
           <form onSubmit={handleSubmit} className="mt-8 grid grid-cols-1 gap-4">
             <div className="grid grid-cols-2 gap-4">
-              <input name="name" value={form.name} onChange={handleChange} required placeholder="Full name" className="input bg-background rounded-md p-3" />
-              <input name="email" value={form.email} onChange={handleChange} required type="email" placeholder="Email" className="input bg-background rounded-md p-3" />
+              <Input name="name" value={form.name} onChange={handleChange} required placeholder="Full name" />
+              <Input name="email" value={form.email} onChange={handleChange} required type="email" placeholder="Email" />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <input name="phone" value={form.phone} onChange={handleChange} required placeholder="Phone" className="input bg-background rounded-md p-3" />
+              <Input name="phone" value={form.phone} onChange={handleChange} required placeholder="Phone" />
               <div className="flex gap-4">
-                <input name="date" value={form.date} onChange={handleChange} required type="date" className="input bg-background rounded-md p-3" />
-                <input name="time" value={form.time} onChange={handleChange} required type="time" className="input bg-background rounded-md p-3" />
+                <Input name="date" value={form.date} onChange={handleChange} required type="date" />
+                <Input name="time" value={form.time} onChange={handleChange} required type="time" />
               </div>
             </div>
 
-            <textarea name="message" value={form.message} onChange={handleChange} rows={5} placeholder="Message (optional)" className="input bg-background rounded-md p-3" />
+            <Textarea name="message" value={form.message} onChange={handleChange} rows={5} placeholder="Message (optional)" />
 
             <div className="flex items-center justify-between">
-              <button type="submit" disabled={status === "sending"} className="btn btn-primary">
+              <Button type="submit" disabled={status === "sending"}>
                 {status === "sending" ? "Sending..." : "Request Appointment"}
-              </button>
+              </Button>
               {status === "sent" && <span className="text-success">Request sent — we will contact you shortly.</span>}
               {status === "error" && <span className="text-destructive">Failed to send. Please try again later.</span>}
             </div>
