@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { useState } from "react"
 import { ThemeToggle } from "./theme-toggle"
 import { Button } from "./ui/button"
@@ -14,8 +15,9 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="h-10 w-10 bg-gradient-to-br from-[#D4B098] to-[#C19B7C] rounded-lg flex items-center justify-center">
-              <span className="text-white font-serif italic text-lg">F</span>
+            <div className="relative h-12 w-36 md:h-14 md:w-44">
+              <Image src="/logo-light.png" alt="FAUNi Bridals logo" fill className="block dark:hidden object-contain" priority />
+              <Image src="/logo-dark.png" alt="FAUNi Bridals logo" fill className="hidden dark:block object-contain" priority />
             </div>
             <div>
               <span className="text-xl font-serif italic text-foreground">FAUNi Bridals</span>

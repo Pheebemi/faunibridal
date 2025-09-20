@@ -35,6 +35,7 @@ import {
   Crown,
 } from "lucide-react"
 import Footer from '@/components/footer'
+import Header from '@/components/header'
 
 export default function HomePage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -42,101 +43,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-4">
-          <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="h-10 w-10 bg-gradient-to-br from-[#D4B098] to-[#C19B7C] rounded-lg flex items-center justify-center">
-                <span className="text-white font-serif italic text-lg">F</span>
-              </div>
-                <div>
-                <span className="text-xl font-serif italic text-foreground">FAUNi Bridals</span>
-                <div className="text-xs text-muted-foreground -mt-1">Luxury Wedding Dresses</div>
-              </div>
-            </div>
-
-            {/* Desktop Navigation */}
-            <NavigationMenu className="hidden md:flex">
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuLink href="/collections" className="px-4 py-2 text-sm font-medium transition-colors hover:text-primary">
-                    Collections
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink href="/appointments" className="px-4 py-2 text-sm font-medium transition-colors hover:text-primary">
-                    Book Appointment
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink href="/about" className="px-4 py-2 text-sm font-medium transition-colors hover:text-primary">
-                    Our Story
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink href="/gallery" className="px-4 py-2 text-sm font-medium transition-colors hover:text-primary">
-                    Gallery
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink href="/contact" className="px-4 py-2 text-sm font-medium transition-colors hover:text-primary">
-                    Contact
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
-
-            {/* Desktop Actions */}
-            <div className="hidden md:flex items-center space-x-4">
-              <ThemeToggle />
-              <Button size="sm">Get Started</Button>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <div className="flex md:hidden items-center space-x-2">
-              <ThemeToggle />
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2"
-              >
-                {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </Button>
-            </div>
-          </div>
-
-          {/* Mobile Navigation Menu */}
-          {isMobileMenuOpen && (
-            <div className="md:hidden border-t bg-background/95 backdrop-blur">
-              <div className="px-4 py-4 space-y-2">
-                {[
-                  { href: "/collections", label: "Collections" },
-                  { href: "/appointments", label: "Book Appointment" },
-                  { href: "/about", label: "Our Story" },
-                  { href: "/gallery", label: "Gallery" },
-                  { href: "/contact", label: "Contact" },
-                ].map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    className="block px-4 py-3 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-                <div className="pt-4 border-t">
-                  <Button className="w-full bg-[#D4B098] hover:bg-[#C19B7C] text-white">Book Appointment</Button>
-                </div>
-                <div className="pt-4 border-t">
-                  <Button className="w-full bg-[#D4B098] hover:bg-[#C19B7C] text-white">Book Appointment</Button>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Carousel Section */}
       <section className="relative min-h-[calc(100vh-64px)] h-[calc(100vh-64px)] overflow-hidden">

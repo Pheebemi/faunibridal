@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Facebook, Instagram } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 
@@ -11,10 +12,11 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              <div className="h-10 w-10 bg-gradient-to-br from-[#D4B098] to-[#C19B7C] rounded-lg flex items-center justify-center">
-                <span className="text-white font-serif italic text-lg">F</span>
+              <div className="relative h-15 w-25">
+                <Image src="/logo-light.png" alt="FAUNi Bridals logo" fill className="block dark:hidden object-contain" priority />
+                <Image src="/logo-dark.png" alt="FAUNi Bridals logo" fill className="hidden dark:block object-contain" priority />
               </div>
-                <div>
+              <div>
                 <span className="text-xl font-serif italic text-foreground">FAUNi Bridals</span>
                 <div className="text-xs text-muted-foreground -mt-1">Luxury Wedding Dresses</div>
               </div>
