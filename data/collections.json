@@ -3,48 +3,56 @@
     "id": "bridal-rentals",
     "title": "Bridal Rentals",
     "description": "Affordable luxury gowns available for rent.",
-    "image": "/dresses/6.jpg"
+    "image": "/dresses/6.jpg",
+    "dresses": ["3"]
   },
   {
     "id": "bridal-dresses-for-sale",
     "title": "Bridal Dresses for Sale",
     "description": "Own your dream wedding dress.",
-    "image": "/dresses/1.jpg"
+    "image": "/dresses/1.jpg",
+    "dresses": ["1"]
   },
   {
     "id": "made-in-naija-customs",
     "title": "Made-in-Naija Customs",
     "description": "Locally crafted, bespoke Nigerian designs.",
-    "image": "/dresses/2.jpg"
+    "image": "/dresses/2.jpg",
+    "dresses": ["2"]
   },
   {
     "id": "luxury-cathedral-veils",
     "title": "Luxury Cathedral Veils",
     "description": "Statement veils for timeless brides.",
-    "image": "/dresses/3.jpg"
+    "image": "/dresses/3.jpg",
+    "dresses": []
   },
   {
     "id": "the-legal-wedding-edit",
     "title": "The Legal Wedding Edit",
     "description": "Chic outfits perfect for your registry/engagement.",
-    "image": "/dresses/4.jpg"
+    "image": "/dresses/4.jpg",
+    "dresses": []
   },
   {
     "id": "luxury-bridal-robes",
     "title": "Luxury Bridal Robes",
     "description": "Elegant robes for your big-day prep.",
-    "image": "/dresses/5.jpg"
+    "image": "/dresses/5.jpg",
+    "dresses": []
   },
   {
     "id": "flower-bouquets",
     "title": "Flower Bouquets",
     "description": "Handcrafted luxury bouquets for your walk down the aisle.",
-    "image": "/dresses/7.jpg"
+    "image": "/dresses/7.jpg",
+    "dresses": []
   },
   {
     "id": "bridesmaids-collection",
     "title": "Bridesmaids Collection",
     "description": "Stylish dresses for your squad to complement your bridal look.",
-    "image": "/dresses/8.jpg"
+    "image": "/dresses/8.jpg",
+    "dresses": []
   }
 ]

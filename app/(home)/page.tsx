@@ -164,7 +164,7 @@ export default function HomePage() {
                     designed to make your special day unforgettable.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <Link href="/dresses">
+                    <Link href="/dresses?collection=bridal-dresses-for-sale">
                       <Button size="lg" className="text-lg px-8 py-6 bg-[#D4B098] hover:bg-[#C19B7C] text-white font-serif">
                         View Dresses
                       </Button>
@@ -202,7 +202,7 @@ export default function HomePage() {
                     Timeless silhouettes and traditional designs that never go out of style.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <Link href="/dresses">
+                    <Link href="/dresses?collection=made-in-naija-customs">
                       <Button size="lg" className="text-lg px-8 py-6 bg-[#D4B098] hover:bg-[#C19B7C] text-white font-serif">
                         View Dresses
                       </Button>
@@ -235,7 +235,7 @@ export default function HomePage() {
                     Contemporary designs for the modern bride who dares to be different.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <Link href="/dresses">
+                    <Link href="/dresses?collection=luxury-cathedral-veils">
                       <Button size="lg" className="text-lg px-8 py-6 bg-[#D4B098] hover:bg-[#C19B7C] text-white font-serif">
                         View Dresses
                       </Button>
@@ -343,8 +343,8 @@ export default function HomePage() {
                         <Link href={`/collections/${col.id}`}>
                           <Button variant="secondary" size="sm" className="bg-white/90 hover:bg-white text-[#C19B7C] hover:text-[#D4B098] font-serif">Learn More</Button>
                         </Link>
-                        <Link href="/dresses">
-                          <Button variant="outline" size="sm" className="text-white border-white/30 font-serif">View Dresses</Button>
+                        <Link href={`/dresses?collection=${col.id}`}>
+                          <Button variant="outline" size="sm" className="font-serif text-[#C19B7C] hover:text-[#D4B098] border-[#C19B7C]">View Dresses</Button>
                         </Link>
                       </div>
                     </div>

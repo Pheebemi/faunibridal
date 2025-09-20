@@ -4,20 +4,23 @@
     "name": "Dress Nhiwo",
     "description": "Elegant A-line wedding dress with lace bodice and tulle skirt.",
     "price": 85000,
-    "image": "/dresses/6.jpg"
+    "image": "/dresses/6.jpg",
+    "collectionId": "bridal-dresses-for-sale"
   },
   {
     "id": "2",
     "name": "Dress Tafisu",
     "description": "2 in 1 mermaid/detachable train. Available in size 14. hip is 46",
     "price":170000,
-    "image": "/dresses/8.jpg"
+    "image": "/dresses/8.jpg",
+    "collectionId": "made-in-naija-customs"
   },
   {
     "id": "3",
     "name": "Dress Zara",
     "description": "Lacey ball gown available in size 14 .",
     "price": 200000,
-    "image": "/dresses/9.jpg"
+    "image": "/dresses/9.jpg",
+    "collectionId": "bridal-rentals"
   }
 ]

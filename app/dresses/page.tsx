@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import dressesData from '@/data/dresses.json'
+import collectionsData from '@/data/collections.json'
 import { Badge } from '@/components/ui/badge'
 import { formatCurrency } from '@/lib/utils'
 import { ThemeToggle } from '@/components/theme-toggle'
@@ -13,16 +14,20 @@ type Dress = {
   description?: string
   price: number
   image: string
+  collectionId?: string
 }
 
 const PAGE_SIZE = 6
 
-export default function DressesPage({ searchParams }: { searchParams?: { page?: string } }) {
+export default function DressesPage({ searchParams }: { searchParams?: { page?: string; collection?: string } }) {
   const dresses = dressesData as Dress[]
   const page = Math.max(1, Number(searchParams?.page ?? 1))
+  const collectionFilter = searchParams?.collection
+  const filtered = collectionFilter ? dresses.filter((d) => d.collectionId === collectionFilter) : dresses
+  const collectionMeta = collectionFilter ? (collectionsData as any[]).find((c) => c.id === collectionFilter) : null
   const start = (page - 1) * PAGE_SIZE
-  const paginated = dresses.slice(start, start + PAGE_SIZE)
-  const totalPages = Math.max(1, Math.ceil(dresses.length / PAGE_SIZE))
+  const paginated = filtered.slice(start, start + PAGE_SIZE)
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
 
   return (
     <div className="min-h-screen bg-background">
@@ -53,9 +58,19 @@ export default function DressesPage({ searchParams }: { searchParams?: { page?: 
       {/* Hero */}
       <section className="py-16">
         <div className="container mx-auto px-4 text-center">
-          <Badge variant="secondary" className="mb-6">Featured</Badge>
-          <h1 className="text-4xl md:text-5xl font-serif mb-4">Our Dresses</h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto">Beautifully crafted wedding gowns — browse our selection and click any dress to view details.</p>
+          {collectionMeta ? (
+            <>
+              <Badge variant="secondary" className="mb-6">{collectionMeta.title}</Badge>
+              <h1 className="text-4xl md:text-5xl font-serif mb-4">{collectionMeta.title} Dresses</h1>
+              <p className="text-muted-foreground max-w-2xl mx-auto">{collectionMeta.description}</p>
+            </>
+          ) : (
+            <>
+              <Badge variant="secondary" className="mb-6">Featured</Badge>
+              <h1 className="text-4xl md:text-5xl font-serif mb-4">Our Dresses</h1>
+              <p className="text-muted-foreground max-w-2xl mx-auto">Beautifully crafted wedding gowns — browse our selection and click any dress to view details.</p>
+            </>
+          )}
         </div>
       </section>
 
@@ -67,6 +82,11 @@ export default function DressesPage({ searchParams }: { searchParams?: { page?: 
               <Link href={`/dresses/${dress.id}`} className="block">
                 <div className="relative aspect-[4/3]">
                   <Image src={dress.image} alt={dress.name} fill className="object-cover transition-transform group-hover:scale-105" />
+                  {dress.collectionId && (
+                    <div className="absolute top-3 left-3">
+                      <Badge className="bg-white/90 text-[#C19B7C] font-serif">{(collectionsData as any[]).find(c=>c.id===dress.collectionId)?.title ?? ''}</Badge>
+                    </div>
+                  )}
                 </div>
                 <div className="p-4">
                   <h3 className="text-lg font-semibold">{dress.name}</h3>
@@ -79,11 +99,16 @@ export default function DressesPage({ searchParams }: { searchParams?: { page?: 
 
         {/* Pagination */}
         <div className="flex items-center justify-center mt-8 space-x-2">
-          {Array.from({ length: totalPages }).map((_, i) => (
-            <Link key={i} href={`/dresses?page=${i + 1}`} className={`px-3 py-1 rounded ${i + 1 === page ? 'bg-primary text-primary-foreground' : 'bg-muted/10'}`}>
-              {i + 1}
-            </Link>
-          ))}
+          {Array.from({ length: totalPages }).map((_, i) => {
+            const pageNum = i + 1
+            const base = `/dresses?page=${pageNum}`
+            const href = collectionFilter ? `${base}&collection=${encodeURIComponent(collectionFilter)}` : base
+            return (
+              <Link key={i} href={href} className={`px-3 py-1 rounded ${pageNum === page ? 'bg-primary text-primary-foreground' : 'bg-muted/10'}`}>
+                {pageNum}
+              </Link>
+            )
+          })}
         </div>
       </main>
 
