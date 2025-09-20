@@ -16,10 +16,10 @@ export default function Header() {
           <div className="flex items-center space-x-3">
             <div className="h-10 w-10 bg-gradient-to-br from-[#D4B098] to-[#C19B7C] rounded-lg flex items-center justify-center">
               <span className="text-white font-serif italic text-lg">F</span>
-                <div>
-                  <span className="text-xl font-serif italic text-foreground">FAUNi Bridals</span>
-                  <div className="text-xs text-muted-foreground -mt-1">Luxury Wedding Dresses</div>
-                </div>
+            </div>
+            <div>
+              <span className="text-xl font-serif italic text-foreground">FAUNi Bridals</span>
+              <div className="text-xs text-muted-foreground -mt-1">Luxury Wedding Dresses</div>
             </div>
           </div>
 
