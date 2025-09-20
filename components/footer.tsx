@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function Footer() {
   const year = new Date().getFullYear()
 
@@ -20,10 +22,10 @@ export default function Footer() {
           <div>
             <h3 className="font-serif text-foreground mb-4">Dresses</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="/dresses" className="underline">New Arrivals</a></li>
-                <li><a href="/dresses" className="underline">Best Sellers</a></li>
-                <li><a href="/dresses" className="underline">Exclusive</a></li>
-                <li><a href="/dresses" className="underline">Accessories</a></li>
+                <li><Link href="/dresses" className="underline">New Arrivals</Link></li>
+                <li><Link href="/dresses" className="underline">Best Sellers</Link></li>
+                <li><Link href="/dresses" className="underline">Exclusive</Link></li>
+                <li><Link href="/dresses" className="underline">Accessories</Link></li>
               </ul>
           </div>
           <div>

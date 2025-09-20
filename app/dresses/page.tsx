@@ -17,6 +17,14 @@ type Dress = {
   collectionId?: string
 }
 
+type Collection = {
+  id: string
+  title: string
+  description?: string
+  image?: string
+  dresses?: string[]
+}
+
 const PAGE_SIZE = 6
 
 export default function DressesPage({ searchParams }: { searchParams?: { page?: string; collection?: string } }) {
@@ -24,7 +32,8 @@ export default function DressesPage({ searchParams }: { searchParams?: { page?: 
   const page = Math.max(1, Number(searchParams?.page ?? 1))
   const collectionFilter = searchParams?.collection
   const filtered = collectionFilter ? dresses.filter((d) => d.collectionId === collectionFilter) : dresses
-  const collectionMeta = collectionFilter ? (collectionsData as any[]).find((c) => c.id === collectionFilter) : null
+  const collections = collectionsData as Collection[]
+  const collectionMeta = collectionFilter ? collections.find((c) => c.id === collectionFilter) : null
   const start = (page - 1) * PAGE_SIZE
   const paginated = filtered.slice(start, start + PAGE_SIZE)
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
@@ -84,7 +93,7 @@ export default function DressesPage({ searchParams }: { searchParams?: { page?: 
                   <Image src={dress.image} alt={dress.name} fill className="object-cover transition-transform group-hover:scale-105" />
                   {dress.collectionId && (
                     <div className="absolute top-3 left-3">
-                      <Badge className="bg-white/90 text-[#C19B7C] font-serif">{(collectionsData as any[]).find(c=>c.id===dress.collectionId)?.title ?? ''}</Badge>
+                      <Badge className="bg-white/90 text-[#C19B7C] font-serif">{collections.find(c => c.id === dress.collectionId)?.title ?? ''}</Badge>
                     </div>
                   )}
                 </div>

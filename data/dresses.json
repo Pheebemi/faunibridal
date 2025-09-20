@@ -22,5 +22,13 @@
     "price": 200000,
     "image": "/dresses/9.jpg",
     "collectionId": "bridal-rentals"
+  },
+  {
+    "id": "4",
+    "name": "Dress Zara",
+    "description": "Lacey ball gown available in size 14 .",
+    "price": 200000,
+    "image": "/dresses/9.jpg",
+    "collectionId": "bridal-rentals"
   }
 ]

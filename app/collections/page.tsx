@@ -4,7 +4,6 @@ import Link from 'next/link'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
 
 export const metadata = {
   title: 'Collections — Fauni Bridal',

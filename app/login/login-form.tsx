@@ -24,11 +24,7 @@ export default function LoginForm() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setIsLoading(true)
-    const formData = new FormData(event.currentTarget)
-    const email = formData.get("email") as string
-    const password = formData.get("password") as string
-
-    // No-op login for static site: redirect to admin for local/demo use
+  // No-op login for static site: redirect to admin for local/demo use
     toast.success("Signed in (demo)")
     router.push("/admin")
     setIsLoading(false)

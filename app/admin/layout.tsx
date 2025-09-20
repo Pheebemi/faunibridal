@@ -13,7 +13,7 @@ export default function AdminLayout({
 }: {
   children: ReactNode
 }) {
-  const { user } = useAuth()
+  useAuth()
   const router = useRouter()
 
   // Auth is a no-op in static mode; keep admin accessible in dev only

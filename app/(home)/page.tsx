@@ -2,9 +2,7 @@
 
 import Image from "next/image"
 import Link from 'next/link'
-import dressesData from '@/data/dresses.json'
 import collections from '@/data/collections.json'
-import { formatCurrency } from '@/lib/utils'
 import { useState } from "react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
