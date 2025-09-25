@@ -27,10 +27,6 @@ export default function EditDressPage() {
     collection_id: ''
   })
 
-  useEffect(() => {
-    loadData()
-  }, [params.id, loadData])
-
   const loadData = useCallback(async () => {
     try {
       const [dressData, collectionsData] = await Promise.all([
@@ -55,6 +51,10 @@ export default function EditDressPage() {
       setLoading(false)
     }
   }, [params.id])
+
+  useEffect(() => {
+    loadData()
+  }, [loadData])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

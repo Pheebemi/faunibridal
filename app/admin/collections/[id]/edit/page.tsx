@@ -24,10 +24,6 @@ export default function EditCollectionPage() {
     image: ''
   })
 
-  useEffect(() => {
-    loadCollection()
-  }, [params.id, loadCollection])
-
   const loadCollection = useCallback(async () => {
     try {
       const data = await getCollectionById(params.id as string)
@@ -45,6 +41,10 @@ export default function EditCollectionPage() {
       setLoading(false)
     }
   }, [params.id])
+
+  useEffect(() => {
+    loadCollection()
+  }, [loadCollection])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
