@@ -1,10 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
-import { createDress, getCollections } from '@/lib/supabase/queries'
-import type { Collection } from '@/lib/types/database'
+import { getDressById, updateDress, getCollections } from '@/lib/supabase/queries'
+import type { Dress, Collection } from '@/lib/types/database'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -12,9 +12,12 @@ import { Textarea } from '@/components/ui/textarea'
 import { ImageUpload } from '@/components/ui/image-upload'
 import { ArrowLeft, Save } from 'lucide-react'
 
-export default function NewDressPage() {
+export default function EditDressPage() {
   const router = useRouter()
-  const [loading, setLoading] = useState(false)
+  const params = useParams()
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [dress, setDress] = useState<Dress | null>(null)
   const [collections, setCollections] = useState<Collection[]>([])
   const [formData, setFormData] = useState({
     name: '',
@@ -25,34 +28,50 @@ export default function NewDressPage() {
   })
 
   useEffect(() => {
-    loadCollections()
-  }, [])
+    loadData()
+  }, [params.id])
 
-  const loadCollections = async () => {
+  const loadData = async () => {
     try {
-      const data = await getCollections()
-      setCollections(data)
+      const [dressData, collectionsData] = await Promise.all([
+        getDressById(params.id as string),
+        getCollections()
+      ])
+      
+      if (dressData) {
+        setDress(dressData)
+        setFormData({
+          name: dressData.name,
+          description: dressData.description,
+          price: dressData.price.toString(),
+          image: dressData.image,
+          collection_id: dressData.collection_id
+        })
+      }
+      setCollections(collectionsData)
     } catch (error) {
-      console.error('Error loading collections:', error)
+      console.error('Error loading data:', error)
+    } finally {
+      setLoading(false)
     }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setLoading(true)
+    setSaving(true)
 
     try {
-      const dress = await createDress({
+      const updatedDress = await updateDress(params.id as string, {
         ...formData,
         price: parseInt(formData.price)
       })
-      if (dress) {
+      if (updatedDress) {
         router.push('/admin/dresses')
       }
     } catch (error) {
-      console.error('Error creating dress:', error)
+      console.error('Error updating dress:', error)
     } finally {
-      setLoading(false)
+      setSaving(false)
     }
   }
 
@@ -61,6 +80,26 @@ export default function NewDressPage() {
       ...prev,
       [e.target.name]: e.target.value
     }))
+  }
+
+  if (loading) {
+    return (
+      <div className="container py-8">
+        <div className="max-w-2xl mx-auto">
+          <div className="text-center">Loading dress...</div>
+        </div>
+      </div>
+    )
+  }
+
+  if (!dress) {
+    return (
+      <div className="container py-8">
+        <div className="max-w-2xl mx-auto">
+          <div className="text-center">Dress not found</div>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -73,7 +112,7 @@ export default function NewDressPage() {
               Back
             </Button>
           </Link>
-          <h1 className="text-3xl font-bold">Add New Dress</h1>
+          <h1 className="text-3xl font-bold">Edit Dress</h1>
         </div>
 
         <Card>
@@ -157,9 +196,9 @@ export default function NewDressPage() {
               </div>
 
               <div className="flex gap-4">
-                <Button type="submit" disabled={loading}>
+                <Button type="submit" disabled={saving}>
                   <Save className="w-4 h-4 mr-2" />
-                  {loading ? 'Creating...' : 'Create Dress'}
+                  {saving ? 'Saving...' : 'Save Changes'}
                 </Button>
                 <Link href="/admin/dresses">
                   <Button type="button" variant="outline">

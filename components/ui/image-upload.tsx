@@ -3,7 +3,8 @@
 import { useState, useRef } from 'react'
 import { Button } from './button'
 import { Input } from './input'
-import { Upload, X, Image as ImageIcon } from 'lucide-react'
+import { Upload, X, Image as ImageIcon, Loader2 } from 'lucide-react'
+import { createClient } from '@/lib/supabase/client'
 
 interface ImageUploadProps {
   value?: string
@@ -14,28 +15,75 @@ interface ImageUploadProps {
 
 export function ImageUpload({ value, onChange, placeholder = "Enter image URL", className }: ImageUploadProps) {
   const [isUploading, setIsUploading] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState(0)
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const uploadImage = async (file: File, path: string): Promise<string | null> => {
+    const supabase = createClient()
+    
+    const { data, error } = await supabase.storage
+      .from('dress-images')
+      .upload(path, file, {
+        cacheControl: '3600',
+        upsert: false
+      })
+
+    if (error) {
+      console.error('Error uploading image:', error)
+      return null
+    }
+
+    const { data: { publicUrl } } = supabase.storage
+      .from('dress-images')
+      .getPublicUrl(data.path)
+
+    return publicUrl
+  }
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (!file) return
 
-    // For now, we'll just show a message that file upload is not implemented
-    // In the future, this would upload to Supabase Storage
-    alert('File upload is not yet implemented. Please use an image URL for now.')
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      alert('Please select an image file (JPG, PNG, GIF, etc.)')
+      return
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert('File size must be less than 5MB')
+      return
+    }
+
+    setIsUploading(true)
+    setUploadProgress(0)
     
-    // TODO: Implement actual file upload to Supabase Storage
-    // setIsUploading(true)
-    // try {
-    //   const uploadedUrl = await uploadImage(file, `dresses/${Date.now()}-${file.name}`)
-    //   if (uploadedUrl) {
-    //     onChange(uploadedUrl)
-    //   }
-    // } catch (error) {
-    //   console.error('Error uploading image:', error)
-    // } finally {
-    //   setIsUploading(false)
-    // }
+    try {
+      // Generate unique filename
+      const timestamp = Date.now()
+      const fileExtension = file.name.split('.').pop()
+      const fileName = `${timestamp}-${Math.random().toString(36).substring(2)}.${fileExtension}`
+      const filePath = `dresses/${fileName}`
+      
+      const uploadedUrl = await uploadImage(file, filePath)
+      if (uploadedUrl) {
+        onChange(uploadedUrl)
+        setUploadProgress(100)
+      } else {
+        alert('Failed to upload image. Please try again.')
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error)
+      alert('Error uploading image. Please try again.')
+    } finally {
+      setIsUploading(false)
+      setUploadProgress(0)
+      // Reset file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ''
+      }
+    }
   }
 
   const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,10 +96,64 @@ export function ImageUpload({ value, onChange, placeholder = "Enter image URL", 
 
   return (
     <div className={`space-y-4 ${className}`}>
-      {/* URL Input */}
+      {/* File Upload */}
       <div>
         <label className="block text-sm font-medium mb-2">
-          Image URL
+          Upload Image
+        </label>
+        <div className="space-y-2">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={isUploading}
+            className="w-full"
+          >
+            {isUploading ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                Uploading...
+              </>
+            ) : (
+              <>
+                <Upload className="w-4 h-4 mr-2" />
+                Choose Image File
+              </>
+            )}
+          </Button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleFileUpload}
+            className="hidden"
+          />
+          <p className="text-xs text-muted-foreground">
+            Supported formats: JPG, PNG, GIF, WebP. Max size: 5MB
+          </p>
+        </div>
+      </div>
+
+      {/* Upload Progress */}
+      {isUploading && (
+        <div className="space-y-2">
+          <div className="flex justify-between text-sm">
+            <span>Uploading...</span>
+            <span>{uploadProgress}%</span>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-2">
+            <div 
+              className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+              style={{ width: `${uploadProgress}%` }}
+            ></div>
+          </div>
+        </div>
+      )}
+
+      {/* URL Input (Alternative) */}
+      <div>
+        <label className="block text-sm font-medium mb-2">
+          Or Enter Image URL
         </label>
         <div className="flex gap-2">
           <Input
@@ -72,30 +174,6 @@ export function ImageUpload({ value, onChange, placeholder = "Enter image URL", 
             </Button>
           )}
         </div>
-      </div>
-
-      {/* File Upload (Future Feature) */}
-      <div>
-        <label className="block text-sm font-medium mb-2">
-          Or Upload File (Coming Soon)
-        </label>
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => fileInputRef.current?.click()}
-          disabled={isUploading}
-          className="w-full"
-        >
-          <Upload className="w-4 h-4 mr-2" />
-          {isUploading ? 'Uploading...' : 'Choose File'}
-        </Button>
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/*"
-          onChange={handleFileUpload}
-          className="hidden"
-        />
       </div>
 
       {/* Image Preview */}
