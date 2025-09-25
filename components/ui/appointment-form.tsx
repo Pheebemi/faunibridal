@@ -40,30 +40,30 @@ export default function AppointmentForm() {
     setIsSubmitting(true)
 
     try {
-      // EmailJS configuration
+      // EmailJS configuration - temporarily use contact template to test
       const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'your_service_id'
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_APPOINTMENT_TEMPLATE_ID || 'your_appointment_template_id'
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'your_template_id' // Use contact template
       const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'your_public_key'
 
       // Debug logging
       console.log('EmailJS Config:', { serviceId, templateId, publicKey: publicKey ? 'Set' : 'Not set' })
 
-      // Template parameters - try common variable names
+      // Template parameters - format as appointment message for contact template
+      const appointmentMessage = `
+Appointment Request:
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Date: ${formData.date}
+Time: ${formData.time}
+${formData.message ? `Message: ${formData.message}` : ''}
+      `.trim()
+
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
-        phone: formData.phone,
-        date: formData.date,
-        time: formData.time,
-        message: formData.message,
-        to_email: 'fauninigeria@gmail.com',
-        // Alternative variable names that might be expected
-        user_name: formData.name,
-        user_email: formData.email,
-        user_phone: formData.phone,
-        appointment_date: formData.date,
-        appointment_time: formData.time,
-        user_message: formData.message
+        message: appointmentMessage,
+        to_email: 'fauninigeria@gmail.com'
       }
 
       // Send email
