@@ -16,6 +16,7 @@ import {
 } from "lucide-react"
 import Footer from '@/components/footer'
 import Header from '@/components/header'
+import ContactForm from '@/components/ui/contact-form'
 
 export default async function HomePage() {
   const collections = await getCollections()
@@ -265,21 +266,7 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <Card className="p-6">
-              <CardHeader>
-                <CardTitle>Send us a Message</CardTitle>
-                <CardDescription>We&#39;d love to hear from you. Send us a message and we&#39;ll respond as soon as possible.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <input type="text" placeholder="First Name" className="px-3 py-2 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" />
-                  <input type="text" placeholder="Last Name" className="px-3 py-2 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" />
-                </div>
-                <input type="email" placeholder="Email Address" className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" />
-                <textarea placeholder="Your Message" rows={4} className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" />
-                <Button className="w-full">Send Message</Button>
-              </CardContent>
-            </Card>
+            <ContactForm />
           </div>
         </div>
       </section>
