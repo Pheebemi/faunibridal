@@ -33,6 +33,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta name="google-site-verification" content="Fj3-2ajVW-mY4oDtFX486CCmuj1wtNEs5jnTP5X2_eg" />
         <link rel="icon" href="/logo-dark.png" type="image/png" />
         <link rel="shortcut icon" href="/logo-dark.png" type="image/png" />
         <link rel="apple-touch-icon" href="/logo-dark.png" />
