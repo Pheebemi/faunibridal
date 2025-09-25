@@ -71,6 +71,8 @@ export default function ContactForm() {
 
     } catch (error) {
       console.error('EmailJS Error:', error)
+      console.error('Error message:', error instanceof Error ? error.message : 'Unknown error')
+      console.error('Error status:', (error as any)?.status || 'No status')
       toast.error("Error", {
         description: "Failed to send message. Please try again or contact us directly.",
       })

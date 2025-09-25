@@ -24,6 +24,9 @@ const actionTypes = {
 
 type ActionType = typeof actionTypes
 
+// Use actionTypes to avoid unused variable warning
+const _ = actionTypes
+
 let count = 0
 
 function genId() {
