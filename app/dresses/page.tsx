@@ -1,42 +1,26 @@
-"use client"
-
 import Link from 'next/link'
 import Image from 'next/image'
-import dressesData from '@/data/dresses.json'
-import collectionsData from '@/data/collections.json'
+import { getDresses, getCollections, getDressesByCollection } from '@/lib/supabase/queries'
 import { Badge } from '@/components/ui/badge'
 import { formatCurrency } from '@/lib/utils'
 import { ThemeToggle } from '@/components/theme-toggle'
 
-type Dress = {
-  id: string
-  name: string
-  description?: string
-  price: number
-  image: string
-  collectionId?: string
-}
-
-type Collection = {
-  id: string
-  title: string
-  description?: string
-  image?: string
-  dresses?: string[]
-}
-
 const PAGE_SIZE = 6
 
-export default function DressesPage({ searchParams }: { searchParams?: { page?: string; collection?: string } }) {
-  const dresses = dressesData as Dress[]
+export default async function DressesPage({ searchParams }: { searchParams?: { page?: string; collection?: string } }) {
   const page = Math.max(1, Number(searchParams?.page ?? 1))
   const collectionFilter = searchParams?.collection
-  const filtered = collectionFilter ? dresses.filter((d) => d.collectionId === collectionFilter) : dresses
-  const collections = collectionsData as Collection[]
+  
+  const [allDresses, collections] = await Promise.all([
+    getDresses(),
+    getCollections()
+  ])
+  
+  const dresses = collectionFilter ? await getDressesByCollection(collectionFilter) : allDresses
   const collectionMeta = collectionFilter ? collections.find((c) => c.id === collectionFilter) : null
   const start = (page - 1) * PAGE_SIZE
-  const paginated = filtered.slice(start, start + PAGE_SIZE)
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
+  const paginated = dresses.slice(start, start + PAGE_SIZE)
+  const totalPages = Math.max(1, Math.ceil(dresses.length / PAGE_SIZE))
 
   return (
     <div className="min-h-screen bg-background">

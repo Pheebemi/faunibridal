@@ -1,23 +1,12 @@
-"use client"
-
-import dressesData from '@/data/dresses.json'
+import { getDressById } from '@/lib/supabase/queries'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { formatCurrency } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
-type Dress = {
-  id: string
-  name: string
-  description?: string
-  price: number
-  image: string
-}
-
-export default function DressPage({ params }: { params: { id: string } }) {
-  const dresses = dressesData as Dress[]
-  const dress = dresses.find((d) => d.id === params.id)
+export default async function DressPage({ params }: { params: { id: string } }) {
+  const dress = await getDressById(params.id)
 
   if (!dress) {
     return (

@@ -1,20 +1,17 @@
 import Header from '@/components/header'
 import Footer from '@/components/footer'
-import collections from '@/data/collections.json'
-import dresses from '@/data/dresses.json'
+import { getCollectionById, getDressesByCollection } from '@/lib/supabase/queries'
 import Image from 'next/image'
 import Link from 'next/link'
 import { formatCurrency } from '@/lib/utils'
 
-export async function generateStaticParams() {
-  return collections.map((c) => ({ id: c.id }))
-}
-
-export default function CollectionDetail({ params }: { params: { id: string } }) {
-  const collection = collections.find((c) => c.id === params.id)
+export default async function CollectionDetail({ params }: { params: { id: string } }) {
+  const [collection, items] = await Promise.all([
+    getCollectionById(params.id),
+    getDressesByCollection(params.id)
+  ])
+  
   if (!collection) return <div className="container py-12">Collection not found</div>
-
-  const items = dresses.filter((d) => d.collectionId === collection.id)
 
   return (
     <div className="flex min-h-screen flex-col">

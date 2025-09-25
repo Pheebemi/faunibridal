@@ -1,16 +1,17 @@
-import collections from '@/data/collections.json'
 import Image from 'next/image'
 import Link from 'next/link'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { Button } from '@/components/ui/button'
+import { getCollections } from '@/lib/supabase/queries'
 
 export const metadata = {
   title: 'Collections — FAUNi Bridals',
   description: 'Explore our curated collections.',
 }
 
-export default function CollectionsPage() {
+export default async function CollectionsPage() {
+  const collections = await getCollections()
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
