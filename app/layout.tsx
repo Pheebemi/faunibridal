@@ -18,6 +18,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "FAUNi Bridals — Luxury Wedding Dresses",
   description: "Luxury handcrafted wedding dresses and bridal services.",
+  icons: {
+    icon: '/logo-dark.png',
+    shortcut: '/logo-dark.png',
+    apple: '/logo-dark.png',
+  },
 };
 
 export default async function RootLayout({
@@ -27,6 +32,11 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/logo-dark.png" type="image/png" />
+        <link rel="shortcut icon" href="/logo-dark.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/logo-dark.png" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem storageKey="algadaff-theme">
           {children}
