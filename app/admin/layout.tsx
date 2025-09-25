@@ -24,8 +24,9 @@ export default function AdminLayout({
   return (
     <div className="flex h-screen">
       <AdminSidebar />
-      <div className="flex-1 flex flex-col">
-        <header className="h-14 border-b px-4 flex items-center justify-end">
+      <div className="flex-1 flex flex-col lg:ml-0">
+        <header className="h-14 border-b px-4 flex items-center justify-between lg:justify-end">
+          <div className="lg:hidden" /> {/* Spacer for mobile */}
           <Button variant="ghost" onClick={handleSignOut}>
             Sign Out
           </Button>
