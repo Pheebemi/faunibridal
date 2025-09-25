@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
 import { getDressById, updateDress, getCollections } from '@/lib/supabase/queries'
@@ -29,9 +29,9 @@ export default function EditDressPage() {
 
   useEffect(() => {
     loadData()
-  }, [params.id])
+  }, [params.id, loadData])
 
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     try {
       const [dressData, collectionsData] = await Promise.all([
         getDressById(params.id as string),
@@ -54,7 +54,7 @@ export default function EditDressPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [params.id])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

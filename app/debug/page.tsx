@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { getCollections } from '@/lib/supabase/queries'
 
 export default function DebugPage() {
-  const [collections, setCollections] = useState<any[]>([])
+  const [collections, setCollections] = useState<unknown[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 

@@ -1,5 +1,5 @@
 import { createClient } from './client'
-import type { Collection, Dress, NewCollection, NewDress, DressWithCollection } from '../types/database'
+import type { Collection, NewCollection, NewDress, DressWithCollection } from '../types/database'
 
 // Collections
 export async function getCollections(): Promise<Collection[]> {

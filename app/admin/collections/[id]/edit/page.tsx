@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
 import { getCollectionById, updateCollection } from '@/lib/supabase/queries'
@@ -26,9 +26,9 @@ export default function EditCollectionPage() {
 
   useEffect(() => {
     loadCollection()
-  }, [params.id])
+  }, [params.id, loadCollection])
 
-  const loadCollection = async () => {
+  const loadCollection = useCallback(async () => {
     try {
       const data = await getCollectionById(params.id as string)
       if (data) {
@@ -44,7 +44,7 @@ export default function EditCollectionPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [params.id])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
