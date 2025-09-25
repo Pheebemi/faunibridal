@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import { getCollections } from '@/lib/supabase/queries'
+import type { Collection } from '@/lib/types/database'
 
 export default function DebugPage() {
-  const [collections, setCollections] = useState<unknown[]>([])
+  const [collections, setCollections] = useState<Collection[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
