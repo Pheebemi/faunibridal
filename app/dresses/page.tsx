@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { getDresses, getCollections, getDressesByCollection } from '@/lib/supabase/queries'
+import type { DressWithCollection } from '@/lib/types/database'
 import { Badge } from '@/components/ui/badge'
 import { formatCurrency } from '@/lib/utils'
 import { ThemeToggle } from '@/components/theme-toggle'
@@ -16,7 +17,7 @@ export default async function DressesPage({ searchParams }: { searchParams?: { p
     getCollections()
   ])
   
-  const dresses = collectionFilter ? await getDressesByCollection(collectionFilter) : allDresses
+  const dresses: DressWithCollection[] = collectionFilter ? await getDressesByCollection(collectionFilter) : allDresses
   const collectionMeta = collectionFilter ? collections.find((c) => c.id === collectionFilter) : null
   const start = (page - 1) * PAGE_SIZE
   const paginated = dresses.slice(start, start + PAGE_SIZE)

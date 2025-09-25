@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
 import { getDressById, updateDress, getCollections } from '@/lib/supabase/queries'
-import type { Dress, Collection } from '@/lib/types/database'
+import type { DressWithCollection, Collection } from '@/lib/types/database'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -17,7 +17,7 @@ export default function EditDressPage() {
   const params = useParams()
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
-  const [dress, setDress] = useState<Dress | null>(null)
+  const [dress, setDress] = useState<DressWithCollection | null>(null)
   const [collections, setCollections] = useState<Collection[]>([])
   const [formData, setFormData] = useState({
     name: '',

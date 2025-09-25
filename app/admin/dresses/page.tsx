@@ -3,14 +3,14 @@
 import Link from 'next/link'
 import { useEffect, useState } from "react"
 import { getDresses, deleteDress } from "@/lib/supabase/queries"
-import type { Dress } from "@/lib/types/database"
+import type { DressWithCollection } from "@/lib/types/database"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Trash2, Edit, Plus } from "lucide-react"
 
 export default function DressesAdminPage() {
-  const [dresses, setDresses] = useState<Dress[]>([])
+  const [dresses, setDresses] = useState<DressWithCollection[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

@@ -68,3 +68,11 @@ export type Dress = Database['public']['Tables']['dresses']['Row']
 export type NewCollection = Database['public']['Tables']['collections']['Insert']
 export type NewDress = Database['public']['Tables']['dresses']['Insert']
 
+// Extended types for joined data
+export type DressWithCollection = Dress & {
+  collections?: {
+    id: string
+    title: string
+  }
+}
+

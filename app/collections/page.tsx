@@ -1,8 +1,8 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { Button } from '@/components/ui/button'
+import { SafeImage } from '@/components/ui/safe-image'
 import { getCollections } from '@/lib/supabase/queries'
 
 export const metadata = {
@@ -12,6 +12,23 @@ export const metadata = {
 
 export default async function CollectionsPage() {
   const collections = await getCollections()
+  
+  // Add fallback for empty collections
+  if (!collections || collections.length === 0) {
+    return (
+      <div className="flex min-h-screen flex-col">
+        <Header />
+        <main className="container mx-auto py-12 px-4 flex-1">
+          <div className="text-center">
+            <h1 className="text-3xl font-semibold mb-4">Collections</h1>
+            <p className="text-muted-foreground">No collections found. Please check your database connection.</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    )
+  }
+  
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
@@ -26,7 +43,12 @@ export default async function CollectionsPage() {
           {collections.map((col) => (
             <div key={col.id} className="group relative overflow-hidden rounded-xl hover:shadow-xl transition-all duration-500">
               <div className="aspect-[3/4] relative">
-                <Image src={col.image} alt={col.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                <SafeImage 
+                  src={col.image} 
+                  alt={col.title} 
+                  fill 
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent"></div>
                 <div className="absolute bottom-6 left-6 right-6">
                   <h3 className="font-serif text-2xl text-white mb-2">{col.title}</h3>

@@ -1,6 +1,5 @@
 import { createClient } from './client'
-import { createClient as createServerClient } from './server'
-import type { Collection, Dress, NewCollection, NewDress } from '../types/database'
+import type { Collection, Dress, NewCollection, NewDress, DressWithCollection } from '../types/database'
 
 // Collections
 export async function getCollections(): Promise<Collection[]> {
@@ -83,7 +82,7 @@ export async function deleteCollection(id: string): Promise<boolean> {
 }
 
 // Dresses
-export async function getDresses(): Promise<Dress[]> {
+export async function getDresses(): Promise<DressWithCollection[]> {
   const supabase = createClient()
   const { data, error } = await supabase
     .from('dresses')
@@ -104,7 +103,7 @@ export async function getDresses(): Promise<Dress[]> {
   return data || []
 }
 
-export async function getDressesByCollection(collectionId: string): Promise<Dress[]> {
+export async function getDressesByCollection(collectionId: string): Promise<DressWithCollection[]> {
   const supabase = createClient()
   const { data, error } = await supabase
     .from('dresses')
@@ -126,7 +125,7 @@ export async function getDressesByCollection(collectionId: string): Promise<Dres
   return data || []
 }
 
-export async function getDressById(id: string): Promise<Dress | null> {
+export async function getDressById(id: string): Promise<DressWithCollection | null> {
   const supabase = createClient()
   const { data, error } = await supabase
     .from('dresses')
@@ -148,7 +147,7 @@ export async function getDressById(id: string): Promise<Dress | null> {
   return data
 }
 
-export async function createDress(dress: NewDress): Promise<Dress | null> {
+export async function createDress(dress: NewDress): Promise<DressWithCollection | null> {
   const supabase = createClient()
   const { data, error } = await supabase
     .from('dresses')
@@ -170,7 +169,7 @@ export async function createDress(dress: NewDress): Promise<Dress | null> {
   return data
 }
 
-export async function updateDress(id: string, updates: Partial<NewDress>): Promise<Dress | null> {
+export async function updateDress(id: string, updates: Partial<NewDress>): Promise<DressWithCollection | null> {
   const supabase = createClient()
   const { data, error } = await supabase
     .from('dresses')

@@ -1,4 +1,5 @@
 import { getDressById } from '@/lib/supabase/queries'
+import type { DressWithCollection } from '@/lib/types/database'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ThemeToggle } from '@/components/theme-toggle'
@@ -6,7 +7,7 @@ import { formatCurrency } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
 export default async function DressPage({ params }: { params: { id: string } }) {
-  const dress = await getDressById(params.id)
+  const dress: DressWithCollection | null = await getDressById(params.id)
 
   if (!dress) {
     return (
