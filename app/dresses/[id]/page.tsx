@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { formatCurrency } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 
 export default async function DressPage({ params }: { params: { id: string } }) {
   const dress: DressWithCollection | null = await getDressById(params.id)
@@ -46,10 +47,27 @@ export default async function DressPage({ params }: { params: { id: string } }) 
         <div className="grid gap-8 md:grid-cols-2 items-start">
           <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden">
             <Image src={dress.image} alt={dress.name} fill className="object-cover" />
+            {/* Collection Badge on Image */}
+            {dress.collections && (
+              <div className="absolute top-4 left-4">
+                <Badge className="bg-white/90 text-[#C19B7C] font-serif backdrop-blur-sm">
+                  {dress.collections.title}
+                </Badge>
+              </div>
+            )}
           </div>
 
           <div>
-            <h1 className="text-3xl font-serif mb-2">{dress.name}</h1>
+            <div className="mb-4">
+              {/* Collection Badge above title */}
+              {dress.collections && (
+                <Badge variant="secondary" className="mb-3 font-serif">
+                  {dress.collections.title}
+                </Badge>
+              )}
+              <h1 className="text-3xl font-serif mb-2">{dress.name}</h1>
+            </div>
+            
             <p className="text-muted-foreground text-lg mb-4">{formatCurrency(dress.price)}</p>
             <p className="mb-6">{dress.description}</p>
 

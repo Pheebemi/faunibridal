@@ -76,9 +76,9 @@ export default async function DressesPage({ searchParams }: { searchParams?: { p
               <Link href={`/dresses/${dress.id}`} className="block">
                 <div className="relative aspect-[4/3]">
                   <Image src={dress.image} alt={dress.name} fill className="object-cover transition-transform group-hover:scale-105" />
-                  {dress.collectionId && (
+                  {dress.collections && (
                     <div className="absolute top-3 left-3">
-                      <Badge className="bg-white/90 text-[#C19B7C] font-serif">{collections.find(c => c.id === dress.collectionId)?.title ?? ''}</Badge>
+                      <Badge className="bg-white/90 text-[#C19B7C] font-serif">{dress.collections.title}</Badge>
                     </div>
                   )}
                 </div>

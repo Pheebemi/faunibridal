@@ -4,6 +4,7 @@ import { getCollectionById, getDressesByCollection } from '@/lib/supabase/querie
 import Image from 'next/image'
 import Link from 'next/link'
 import { formatCurrency } from '@/lib/utils'
+import { Badge } from '@/components/ui/badge'
 
 export default async function CollectionDetail({ params }: { params: { id: string } }) {
   const [collection, items] = await Promise.all([
@@ -29,6 +30,14 @@ export default async function CollectionDetail({ params }: { params: { id: strin
             <div key={dress.id} className="group relative overflow-hidden rounded-xl hover:shadow-xl transition-all duration-500">
               <div className="aspect-[3/4] relative">
                 <Image src={dress.image} alt={dress.name} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                {/* Collection Badge */}
+                {dress.collections && (
+                  <div className="absolute top-4 left-4">
+                    <Badge className="bg-white/90 text-[#C19B7C] font-serif backdrop-blur-sm">
+                      {dress.collections.title}
+                    </Badge>
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent"></div>
                 <div className="absolute bottom-6 left-6 right-6">
                   <h3 className="font-serif text-2xl text-white mb-2">{dress.name}</h3>
