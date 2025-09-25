@@ -83,7 +83,7 @@ export default function ContactForm() {
     <Card className="p-6">
       <CardHeader>
         <CardTitle>Send us a Message</CardTitle>
-        <CardDescription>We'd love to hear from you. Send us a message and we'll respond as soon as possible.</CardDescription>
+        <CardDescription>We&apos;d love to hear from you. Send us a message and we&apos;ll respond as soon as possible.</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
