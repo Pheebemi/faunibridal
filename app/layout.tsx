@@ -19,9 +19,9 @@ export const metadata: Metadata = {
   title: "FAUNi Bridals — Luxury Wedding Dresses",
   description: "Luxury handcrafted wedding dresses and bridal services.",
   icons: {
-    icon: '/logo-dark.png',
-    shortcut: '/logo-dark.png',
-    apple: '/logo-dark.png',
+    icon: '/icon.png',
+    shortcut: '/favicon.ico',
+    apple: '/apple-icon.png',
   },
 };
 
@@ -34,9 +34,9 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="google-site-verification" content="Fj3-2ajVW-mY4oDtFX486CCmuj1wtNEs5jnTP5X2_eg" />
-        <link rel="icon" href="/logo-dark.png" type="image/png" />
-        <link rel="shortcut icon" href="/logo-dark.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/logo-dark.png" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/icon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem storageKey="algadaff-theme">
