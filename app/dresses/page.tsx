@@ -8,9 +8,10 @@ import { ThemeToggle } from '@/components/theme-toggle'
 
 const PAGE_SIZE = 6
 
-export default async function DressesPage({ searchParams }: { searchParams?: { page?: string; collection?: string } }) {
-  const page = Math.max(1, Number(searchParams?.page ?? 1))
-  const collectionFilter = searchParams?.collection
+export default async function DressesPage({ searchParams }: { searchParams?: Promise<{ page?: string; collection?: string }> }) {
+  const resolvedSearchParams = await searchParams
+  const page = Math.max(1, Number(resolvedSearchParams?.page ?? 1))
+  const collectionFilter = resolvedSearchParams?.collection
   
   const [allDresses, collections] = await Promise.all([
     getDresses(),

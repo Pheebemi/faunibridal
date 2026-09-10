@@ -1,6 +1,6 @@
-import { NextResponse, type NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 
-export function middleware(request: NextRequest) {
+export function proxy() {
   // Minimal pass-through middleware.
   // Authentication/middleware behavior was removed for static deployment.
   return NextResponse.next()
