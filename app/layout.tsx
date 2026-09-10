@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
@@ -43,6 +44,7 @@ export default async function RootLayout({
           {children}
           <Toaster />
           <WhatsAppButton phone="2348066337880" />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
