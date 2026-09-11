@@ -7,8 +7,9 @@ import { formatCurrency } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 
-export default async function DressPage({ params }: { params: { id: string } }) {
-  const dress: DressWithCollection | null = await getDressById(params.id)
+export default async function DressPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const dress: DressWithCollection | null = await getDressById(id)
 
   if (!dress) {
     return (

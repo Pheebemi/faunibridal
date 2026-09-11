@@ -6,10 +6,11 @@ import Link from 'next/link'
 import { formatCurrency } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 
-export default async function CollectionDetail({ params }: { params: { id: string } }) {
+export default async function CollectionDetail({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
   const [collection, items] = await Promise.all([
-    getCollectionById(params.id),
-    getDressesByCollection(params.id)
+    getCollectionById(id),
+    getDressesByCollection(id)
   ])
   
   if (!collection) return <div className="container py-12">Collection not found</div>
